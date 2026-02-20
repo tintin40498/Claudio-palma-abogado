@@ -28,6 +28,7 @@
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#areas">Áreas</a></li>
+                <li><a href="#casos">Casos</a></li>
                 <li><a href="#sobre-mi">Estudio</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -125,12 +126,25 @@
     <!-- Foto del Dr. Claudio Palma -->
     <section style="padding: 60px 20px; text-align: center; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);">
         <div class="container">
-            <img src="https://raw.githubusercontent.com/tintin40498/Claudio-palma-abogado/main/images/Captura%20de%20pantalla_2026-02-20-04-03-21-751_com.instagram.android.jpg" 
+            <img src="https://raw.githubusercontent.com/tintin40498/Claudio-palma-abogado/main/images/dr-palma.jpg" 
                  alt="Dr. Claudio Palma" 
                  style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #fbbf24; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 25px;">
             <h2 style="color: #0a1a2f; font-size: 2.2rem; margin-bottom: 10px; font-weight: 700;">Dr. Claudio Palma</h2>
             <p style="color: #fbbf24; font-size: 1.3rem; font-weight: 600; margin-bottom: 10px; letter-spacing: 1px;">Titular del Estudio</p>
             <p style="color: #475569; max-width: 600px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">T° XXVI F° 138 C.A.L.Z • Más de 15 años de experiencia defendiendo los derechos de los trabajadores y las familias con compromiso y ética profesional.</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE CASOS PUBLICADOS (NUEVA) -->
+    <section id="casos" style="padding: 60px 20px; background-color: #f8fafc;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Casos de Éxito</h2>
+                <p>Resultados reales obtenidos para nuestros clientes</p>
+            </div>
+            <div id="casos-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Los casos se cargan desde casos.js -->
+            </div>
         </div>
     </section>
 
@@ -256,6 +270,14 @@
                     <p><i class="fas fa-envelope"></i> abogadoclaudiopalma.srt@gmail.com</p>
                 </div>
             </div>
+            
+            <!-- ENLACES LEGALES (NUEVO) -->
+            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <a href="/aviso-legal.html" style="color: #94a3b8; margin: 0 10px;">Aviso Legal</a>
+                <a href="/politica-privacidad.html" style="color: #94a3b8; margin: 0 10px;">Política de Privacidad</a>
+                <a href="/admin.html" style="color: #94a3b8; margin: 0 10px; opacity:0.5;">⚙️</a>
+            </div>
+            
             <div class="footer-copyright">
                 <p>&copy; 2024 Dr. Claudio Palma - Todos los derechos reservados</p>
             </div>
@@ -263,5 +285,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="casos.js"></script>
 </body>
-        </html>
+                        </html>
