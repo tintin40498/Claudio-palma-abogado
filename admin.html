@@ -3,163 +3,505 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Dr. Claudio Palma</title>
+    <title>Dr. Claudio Palma · Panel Profesional</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial; background: #0a1a2f; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-        .login-box { max-width: 400px; width: 100%; background: white; padding: 30px; border-radius: 10px; }
-        h2 { color: #0a1a2f; text-align: center; margin-bottom: 20px; }
-        input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
-        button { width: 100%; padding: 10px; background: #0a1a2f; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 10px 0; }
-        .logout { background: #dc3545; }
-        .error { color: red; text-align: center; }
-        .success { color: green; text-align: center; }
-        .panel { display: none; }
-        .preview { max-width: 200px; margin: 10px 0; }
-        .attempts-counter { font-size: 0.8rem; color: #666; text-align: center; margin-top: 10px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+        }
+
+        :root {
+            --primary: #0b3b5c;
+            --gold: #d0a933;
+            --bg: #f4f7fc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --border: #e0e9f2;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* LOGIN */
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 85vh;
+        }
+
+        .login-card {
+            background: var(--card);
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px -15px rgba(11, 59, 92, 0.2);
+            width: 100%;
+            max-width: 440px;
+            border: 1px solid rgba(208, 169, 51, 0.15);
+        }
+
+        .login-card h2 {
+            color: var(--primary);
+            font-size: 34px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .login-card p {
+            color: #5f6b7a;
+            margin-bottom: 35px;
+            font-size: 16px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 18px;
+            margin: 12px 0;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            font-size: 16px;
+            background: #fafdff;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(208, 169, 51, 0.15);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 24px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .login-btn:hover {
+            background: #0f4a70;
+        }
+
+        /* PANEL */
+        .panel {
+            display: none;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 25px 35px;
+            background: var(--card);
+            border-radius: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .logo h1 {
+            color: var(--primary);
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-size: 14px;
+            margin-top: 6px;
+            display: block;
+        }
+
+        .user-badge {
+            background: #edf2f9;
+            padding: 12px 25px;
+            border-radius: 40px;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 35px;
+            padding: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #4a5a6a;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            font-size: 15px;
+            background: #f9fdff;
+        }
+
+        .input-group input:focus,
+        .input-group textarea:focus {
+            border-color: var(--gold);
+            outline: none;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-secondary {
+            background: #eef3f9;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .casos-lista {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .caso-item {
+            background: #f8fbfe;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .caso-item h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .caso-foto {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .acciones {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
-    <!-- LOGIN -->
-    <div id="login" class="login-box">
-        <h2>🔐 Acceso Privado</h2>
-        <input type="text" id="username" value="dr.palma" readonly style="background:#f5f5f5;">
-        <input type="password" id="password" placeholder="Contraseña">
-        <button onclick="verificarLogin()">Ingresar</button>
-        <div id="loginError" class="error"></div>
-        <div id="attemptsDisplay" class="attempts-counter"></div>
-    </div>
+    <div class="container">
+        <!-- LOGIN SCREEN -->
+        <div id="loginScreen" class="login-screen">
+            <div class="login-card">
+                <h2>Dr. Claudio Palma</h2>
+                <p>Panel de administración profesional</p>
+                <input type="text" id="username" class="login-input" placeholder="Usuario" value="dr.palma">
+                <input type="password" id="password" class="login-input" placeholder="Contraseña">
+                <button class="login-btn" onclick="verificarLogin()">Ingresar</button>
+                <p id="loginError" style="color: #ef4444; margin-top: 20px;"></p>
+            </div>
+        </div>
 
-    <!-- PANEL DE PUBLICACIÓN -->
-    <div id="panel" class="panel login-box">
-        <h2>📝 Publicar caso</h2>
-        <select id="area">
-            <option value="Civil">Civil</option>
-            <option value="Comercial">Comercial</option>
-            <option value="Familiar">Familiar</option>
-            <option value="Laboral">Laboral</option>
-            <option value="ART">ART</option>
-            <option value="Transito">Tránsito</option>
-        </select>
-        <input type="text" id="titulo" placeholder="Título">
-        <textarea id="descripcion" rows="3" placeholder="Descripción"></textarea>
-        <input type="text" id="resultado" placeholder="Resultado">
-        <input type="file" id="foto" accept="image/*" onchange="previewImage(event)">
-        <img id="preview" class="preview">
-        <button onclick="publicarCaso()">📤 PUBLICAR</button>
-        <p id="mensaje" class="success"></p>
-        <button class="logout" onclick="cerrarSesion()">Cerrar sesión</button>
-    </div>
+        <!-- PANEL PRINCIPAL -->
+        <div id="panel" class="panel">
+            <!-- HEADER -->
+            <div class="header">
+                <div class="logo">
+                    <h1>Dr. Claudio Palma</h1>
+                    <span>Panel de control · Estudio jurídico</span>
+                </div>
+                <div class="user-badge" onclick="cerrarSesion()" style="cursor: pointer;">
+                    🚪 Cerrar sesión
+                </div>
+            </div>
 
-    <!-- BLOQUEO -->
-    <div id="blocked" class="login-box" style="display:none;">
-        <div style="background:#dc3545; color:white; padding:20px; border-radius:5px; text-align:center;">
-            <h3>⛔ BLOQUEADO</h3>
-            <p>Demasiados intentos fallidos.</p>
-            <p>Se avisó al Dr. Palma por WhatsApp.</p>
-            <button onclick="location.reload()">Reintentar</button>
+            <div class="grid-2">
+                <!-- EDITOR DE TEXTO DE LA PÁGINA PRINCIPAL -->
+                <div class="card">
+                    <h2>📝 Editar texto principal</h2>
+                    <div class="input-group">
+                        <label>Presentación (título principal)</label>
+                        <input type="text" id="mainTitle" value="Dr. Claudio Palma">
+                    </div>
+                    <div class="input-group">
+                        <label>Subtítulo / Especialidades</label>
+                        <textarea id="mainSubtitle">Derecho Civil · Comercial · Familiar · Laboral · Accidentes</textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Descripción profesional</label>
+                        <textarea id="mainDesc">Más de 15 años defendiendo los derechos de los trabajadores y las familias con compromiso y ética profesional.</textarea>
+                    </div>
+                    <button class="btn" onclick="guardarTextoPrincipal()">💾 Guardar cambios</button>
+                </div>
+
+                <!-- EDITOR DE CONTACTO Y UBICACIÓN -->
+                <div class="card">
+                    <h2>📍 Contacto y ubicación</h2>
+                    <div class="input-group">
+                        <label>Teléfono / WhatsApp</label>
+                        <input type="text" id="contactWhatsapp" value="11-5311-2273">
+                    </div>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" id="contactEmail" value="contacto@claudiopalma.com">
+                    </div>
+                    <div class="input-group">
+                        <label>Dirección / Oficina</label>
+                        <input type="text" id="contactAddress" value="Av. Corrientes 1234, CABA">
+                    </div>
+                    <div class="input-group">
+                        <label>Horario de atención</label>
+                        <input type="text" id="contactHours" value="Lunes a Viernes 9:00 a 19:00">
+                    </div>
+                    <button class="btn" onclick="guardarContacto()">💾 Guardar contacto</button>
+                </div>
+            </div>
+
+            <!-- PUBLICAR NUEVO CASO -->
+            <div class="card" style="margin-bottom: 25px;">
+                <h2>📸 Publicar nuevo caso</h2>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+                    <div>
+                        <div class="input-group">
+                            <label>Área del caso</label>
+                            <select id="casoArea" style="width:100%; padding:16px; border-radius:24px; border:1px solid var(--border);">
+                                <option>Civil</option>
+                                <option>Comercial</option>
+                                <option>Familiar</option>
+                                <option>Laboral</option>
+                                <option>ART</option>
+                                <option>Tránsito</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Título del caso</label>
+                            <input type="text" id="casoTitulo" placeholder="Ej: Indemnización por despido">
+                        </div>
+                        <div class="input-group">
+                            <label>Descripción</label>
+                            <textarea id="casoDesc" placeholder="Detalles del caso..."></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Resultado obtenido</label>
+                            <textarea id="casoResult" placeholder="Ej: $2.500.000 de indemnización"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group">
+                            <label>Foto del caso</label>
+                            <input type="file" id="casoFoto" accept="image/*" onchange="previewCasoFoto(event)">
+                            <img id="preview" style="max-width:100%; max-height:200px; margin-top:15px; border-radius:15px; display:none;">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn" onclick="publicarCaso()" style="width:100%; margin-top:15px;">📤 PUBLICAR CASO</button>
+            </div>
+
+            <!-- CASOS PUBLICADOS -->
+            <div class="card">
+                <h2>📋 Casos publicados</h2>
+                <div class="casos-lista" id="casosList"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        const CONTRASENA = "2121ñ@rt";
-        const WHATSAPP = "5491153112273";
-        const MAX_INTENTOS = 3;
-        
-        let intentos = parseInt(localStorage.getItem('intentos') || '0');
-        let bloqueado = parseInt(localStorage.getItem('bloqueado') || '0');
-        
-        if (bloqueado > Date.now()) {
-            document.getElementById('login').style.display = 'none';
-            document.getElementById('blocked').style.display = 'block';
+        // CREDENCIALES
+        const USUARIO = 'dr.palma';
+        const CONTRASENA = '2121ñ@rt';
+        const WHATSAPP_ADMIN = '1153112273';
+
+        // Verificar sesión al cargar
+        if (localStorage.getItem('sesion') === 'activa') {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('panel').style.display = 'block';
+            cargarDatosGuardados();
         }
-        
+
         function verificarLogin() {
-            if (bloqueado > Date.now()) return;
-            
+            const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
-            
-            if (pass === CONTRASENA) {
-                intentos = 0;
-                localStorage.setItem('intentos', '0');
-                document.getElementById('login').style.display = 'none';
+
+            if (user === USUARIO && pass === CONTRASENA) {
+                localStorage.setItem('sesion', 'activa');
+                document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('panel').style.display = 'block';
+                cargarDatosGuardados();
             } else {
-                intentos++;
-                localStorage.setItem('intentos', intentos);
-                document.getElementById('loginError').innerText = `❌ Incorrecta. Intento ${intentos}/${MAX_INTENTOS}`;
-                
-                if (intentos >= MAX_INTENTOS) {
-                    const hasta = Date.now() + 30 * 60 * 1000;
-                    localStorage.setItem('bloqueado', hasta);
-                    
-                    fetch('https://api.ipify.org?format=json')
-                        .then(r => r.json())
-                        .then(data => {
-                            const url = `https://wa.me/${WHATSAPP}?text=🔴 Alerta: alguien intentó entrar ${intentos} veces. IP: ${data.ip}`;
-                            window.open(url, '_blank');
-                        });
-                    
-                    document.getElementById('login').style.display = 'none';
-                    document.getElementById('blocked').style.display = 'block';
-                }
+                document.getElementById('loginError').innerText = '❌ Usuario o contraseña incorrectos';
             }
         }
-        
+
         function cerrarSesion() {
             localStorage.removeItem('sesion');
-            document.getElementById('login').style.display = 'block';
+            document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('panel').style.display = 'none';
         }
-        
-        function previewImage(e) {
+
+        function guardarTextoPrincipal() {
+            const data = {
+                titulo: document.getElementById('mainTitle').value,
+                subtitulo: document.getElementById('mainSubtitle').value,
+                descripcion: document.getElementById('mainDesc').value
+            };
+            localStorage.setItem('textoPrincipal', JSON.stringify(data));
+            alert('✅ Texto principal guardado');
+        }
+
+        function guardarContacto() {
+            const data = {
+                whatsapp: document.getElementById('contactWhatsapp').value,
+                email: document.getElementById('contactEmail').value,
+                direccion: document.getElementById('contactAddress').value,
+                horario: document.getElementById('contactHours').value
+            };
+            localStorage.setItem('contacto', JSON.stringify(data));
+            alert('✅ Contacto guardado');
+        }
+
+        function previewCasoFoto(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = (e) => document.getElementById('preview').src = e.target.result;
+                reader.onload = (e) => {
+                    document.getElementById('preview').src = e.target.result;
+                    document.getElementById('preview').style.display = 'block';
+                };
                 reader.readAsDataURL(file);
             }
         }
-        
+
         function publicarCaso() {
-            const titulo = document.getElementById('titulo').value;
-            const desc = document.getElementById('descripcion').value;
-            const res = document.getElementById('resultado').value;
-            
-            if (!titulo || !desc || !res) {
-                document.getElementById('mensaje').innerText = '❌ Completá todo';
+            const titulo = document.getElementById('casoTitulo').value;
+            const area = document.getElementById('casoArea').value;
+            const desc = document.getElementById('casoDesc').value;
+            const res = document.getElementById('casoResult').value;
+
+            if (!titulo || !area || !desc || !res) {
+                alert('❌ Completá todos los campos');
                 return;
             }
-            
-            const foto = document.getElementById('foto').files[0];
+
+            const foto = document.getElementById('casoFoto').files[0];
             if (foto) {
                 const reader = new FileReader();
-                reader.onload = (e) => guardar(e.target.result);
+                reader.onload = (e) => guardarCaso(e.target.result);
                 reader.readAsDataURL(foto);
             } else {
-                guardar('');
+                guardarCaso('');
             }
         }
-        
-        function guardar(foto) {
+
+        function guardarCaso(foto) {
             let casos = JSON.parse(localStorage.getItem('casos') || '[]');
             casos.unshift({
                 id: Date.now(),
-                area: document.getElementById('area').value,
-                titulo: document.getElementById('titulo').value,
-                descripcion: document.getElementById('descripcion').value,
-                resultado: document.getElementById('resultado').value,
+                area: document.getElementById('casoArea').value,
+                titulo: document.getElementById('casoTitulo').value,
+                descripcion: document.getElementById('casoDesc').value,
+                resultado: document.getElementById('casoResult').value,
                 foto: foto,
-                fecha: new Date().toLocaleDateString()
+                fecha: new Date().toLocaleString()
             });
             localStorage.setItem('casos', JSON.stringify(casos));
-            document.getElementById('mensaje').innerText = '✅ Publicado';
-            document.getElementById('titulo').value = '';
-            document.getElementById('descripcion').value = '';
-            document.getElementById('resultado').value = '';
-            document.getElementById('foto').value = '';
-            document.getElementById('preview').src = '';
+            
+            // Limpiar
+            document.getElementById('casoTitulo').value = '';
+            document.getElementById('casoDesc').value = '';
+            document.getElementById('casoResult').value = '';
+            document.getElementById('casoFoto').value = '';
+            document.getElementById('preview').style.display = 'none';
+            
+            actualizarListaCasos();
+            alert('✅ Caso publicado');
+        }
+
+        function actualizarListaCasos() {
+            const casos = JSON.parse(localStorage.getItem('casos') || '[]');
+            const lista = document.getElementById('casosList');
+            lista.innerHTML = casos.map(c => `
+                <div class="caso-item">
+                    <h4>${c.titulo} <small style="font-weight:normal; color:#64748b;">(${c.area})</small></h4>
+                    <p><strong>Descripción:</strong> ${c.descripcion}</p>
+                    <p><strong>Resultado:</strong> ${c.resultado}</p>
+                    ${c.foto ? `<img src="${c.foto}" class="caso-foto">` : ''}
+                    <small style="color:#64748b;">📅 ${c.fecha}</small>
+                    <div class="acciones">
+                        <button class="btn btn-small btn-secondary" onclick="eliminarCaso(${c.id})">🗑️ Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function eliminarCaso(id) {
+            let casos = JSON.parse(localStorage.getItem('casos') || '[]');
+            casos = casos.filter(c => c.id !== id);
+            localStorage.setItem('casos', JSON.stringify(casos));
+            actualizarListaCasos();
+        }
+
+        function cargarDatosGuardados() {
+            const texto = JSON.parse(localStorage.getItem('textoPrincipal'));
+            if (texto) {
+                document.getElementById('mainTitle').value = texto.titulo || 'Dr. Claudio Palma';
+                document.getElementById('mainSubtitle').value = texto.subtitulo || '';
+                document.getElementById('mainDesc').value = texto.descripcion || '';
+            }
+
+            const contacto = JSON.parse(localStorage.getItem('contacto'));
+            if (contacto) {
+                document.getElementById('contactWhatsapp').value = contacto.whatsapp || '11-5311-2273';
+                document.getElementById('contactEmail').value = contacto.email || 'contacto@claudiopalma.com';
+                document.getElementById('contactAddress').value = contacto.direccion || 'Av. Corrientes 1234, CABA';
+                document.getElementById('contactHours').value = contacto.horario || 'Lunes a Viernes 9:00 a 19:00';
+            }
+
+            actualizarListaCasos();
         }
     </script>
 </body>
-  </html>
+                                                                                 </html>
