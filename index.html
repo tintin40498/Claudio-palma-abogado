@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* (mismos estilos que tenías, se mantienen igual) */
         * {
             margin: 0;
             padding: 0;
@@ -36,6 +37,7 @@
             padding: 0 20px;
         }
 
+        /* WhatsApp flotante */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -59,6 +61,7 @@
             transform: scale(1.1);
         }
 
+        /* Header */
         header {
             background: var(--primary);
             color: white;
@@ -118,6 +121,7 @@
             color: var(--gold);
         }
 
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, #1a4b6e 100%);
             color: white;
@@ -146,6 +150,7 @@
             margin-bottom: 20px;
         }
 
+        /* Secciones */
         section {
             padding: 80px 0;
         }
@@ -167,6 +172,7 @@
             margin: 15px auto 0;
         }
 
+        /* Grid de servicios */
         .servicios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -198,6 +204,7 @@
             margin-bottom: 15px;
         }
 
+        /* Grid de áreas */
         .areas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -229,6 +236,7 @@
             font-size: 14px;
         }
 
+        /* Estadísticas */
         .stats {
             background: var(--primary);
             color: white;
@@ -248,6 +256,22 @@
             color: var(--gold);
         }
 
+        /* Sobre mí */
+        .sobre-mi {
+            background: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .sobre-mi p {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-light);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* Casos de éxito */
         .casos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -309,6 +333,7 @@
             color: var(--primary);
         }
 
+        /* Contacto */
         .contacto {
             background: var(--primary);
             color: white;
@@ -357,6 +382,7 @@
             overflow: hidden;
         }
 
+        /* Footer */
         footer {
             background: #0a1a2a;
             color: white;
@@ -431,10 +457,12 @@
     </style>
 </head>
 <body>
+    <!-- WhatsApp flotante -->
     <a href="https://wa.me/5491153112273" class="whatsapp-float" target="_blank" id="whatsappFloat">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -450,6 +478,7 @@
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#servicios">Servicios</a></li>
                         <li><a href="#areas">Áreas</a></li>
+                        <li><a href="#sobre-mi">Sobre mí</a></li>
                         <li><a href="#casos">Casos</a></li>
                         <li><a href="#contacto">Contacto</a></li>
                     </ul>
@@ -458,6 +487,7 @@
         </div>
     </header>
 
+    <!-- Hero / Inicio -->
     <section id="inicio" class="hero">
         <div class="container">
             <span class="hero-badge">T° XXVI F° 138 C.A.L.Z</span>
@@ -466,6 +496,7 @@
         </div>
     </section>
 
+    <!-- Servicios destacados -->
     <section id="servicios">
         <div class="container">
             <h2 class="section-title">Áreas de práctica</h2>
@@ -478,6 +509,7 @@
         </div>
     </section>
 
+    <!-- Áreas detalladas -->
     <section id="areas" style="background: #f1f5f9;">
         <div class="container">
             <h2 class="section-title">Especialidades</h2>
@@ -492,16 +524,26 @@
         </div>
     </section>
 
+    <!-- Estadísticas -->
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
-                <div><div class="stat-number">650+</div><p>Casos exitosos</p></div>
-                <div><div class="stat-number">15+</div><p>Años de experiencia</p></div>
-                <div><div class="stat-number">100%</div><p>Dedicación exclusiva</p></div>
+                <div><div class="stat-number" id="statCasos">650+</div><p>Casos exitosos</p></div>
+                <div><div class="stat-number" id="statAnos">15+</div><p>Años de experiencia</p></div>
+                <div><div class="stat-number" id="statDedicacion">100%</div><p>Dedicación exclusiva</p></div>
             </div>
         </div>
     </section>
 
+    <!-- Sobre mí (dinámico) -->
+    <section id="sobre-mi" class="sobre-mi">
+        <div class="container">
+            <h2 class="section-title">Sobre mí</h2>
+            <p id="bioTexto">Titular del Estudio Jurídico, especializado en derecho laboral, civil y de familia. Con más de 15 años de trayectoria, mi compromiso es brindar un servicio personalizado, ético y eficiente.</p>
+        </div>
+    </section>
+
+    <!-- Casos de éxito (dinámicos) -->
     <section id="casos">
         <div class="container">
             <h2 class="section-title">Casos de éxito</h2>
@@ -509,76 +551,85 @@
         </div>
     </section>
 
+    <!-- Contacto -->
     <section id="contacto" class="contacto">
         <div class="container">
             <h2 class="section-title" style="color: white;">Contacto</h2>
             <div class="contacto-grid">
                 <div class="contacto-info">
-                    <div class="contacto-card"><i class="fab fa-whatsapp"></i><h3>WhatsApp</h3><a href="https://wa.me/5491153112273" class="contacto-link" id="contactWhatsapp">11-5311-2273</a><p class="contacto-desc">Respuesta rápida</p></div>
-                    <div class="contacto-card"><i class="fas fa-envelope"></i><h3>Email</h3><a href="mailto:abogadoclaudiopalma.srt@gmail.com" class="contacto-link" id="contactEmail">abogadoclaudiopalma.srt@gmail.com</a></div>
-                    <div class="contacto-card"><i class="fas fa-map-marker-alt"></i><h3>Oficina</h3><p class="contacto-link" id="contactAddress">Av. Corrientes 1234, CABA</p><p class="contacto-desc" id="contactHours">Con cita previa · Lun-Vie 9-19hs</p></div>
+                    <div class="contacto-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <a href="https://wa.me/5491153112273" class="contacto-link" id="contactWhatsapp">11-5311-2273</a>
+                        <p class="contacto-desc">Respuesta rápida</p>
+                    </div>
+                    <div class="contacto-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <a href="mailto:abogadoclaudiopalma.srt@gmail.com" class="contacto-link" id="contactEmail">abogadoclaudiopalma.srt@gmail.com</a>
+                    </div>
+                    <div class="contacto-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Oficina</h3>
+                        <p class="contacto-link" id="contactAddress">Av. Corrientes 1234, CABA</p>
+                        <p class="contacto-desc" id="contactHours">Con cita previa · Lun-Vie 9-19hs</p>
+                    </div>
                 </div>
-                <div class="contacto-mapa">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.0168881864197!2d-58.38375908477037!3d-34.60373888045943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacf0f8c7f6d%3A0x2b1d5e8c0b8b9c0f!2sAv.%20Corrientes%201234%2C%20C1043%20CABA!5e0!3m2!1ses!2sar!4v1620000000000!5m2!1ses!2sar" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+                <div class="contacto-mapa" id="contactMap"></div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand"><h3>Claudio Palma</h3><p>Abogado</p><p class="footer-matricula">T° XXVI F° 138 C.A.L.Z</p></div>
-                <div class="footer-areas"><h4>Áreas</h4><ul><li>Derecho Civil</li><li>Derecho Comercial</li><li>Derecho Familiar</li><li>Derecho Laboral</li><li>Accidentes de Trabajo</li><li>Accidentes de Tránsito</li></ul></div>
-                <div class="footer-contact"><h4>Contacto</h4><p><i class="fab fa-whatsapp"></i> <span id="footerWhatsapp">11-5311-2273</span></p><p><i class="fas fa-envelope"></i> <span id="footerEmail">abogadoclaudiopalma.srt@gmail.com</span></p></div>
+                <div class="footer-brand">
+                    <h3>Claudio Palma</h3>
+                    <p>Abogado</p>
+                    <p class="footer-matricula">T° XXVI F° 138 C.A.L.Z</p>
+                </div>
+                <div class="footer-areas">
+                    <h4>Áreas</h4>
+                    <ul>
+                        <li>Derecho Civil</li>
+                        <li>Derecho Comercial</li>
+                        <li>Derecho Familiar</li>
+                        <li>Derecho Laboral</li>
+                        <li>Accidentes de Trabajo</li>
+                        <li>Accidentes de Tránsito</li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <p><i class="fab fa-whatsapp"></i> <span id="footerWhatsapp">11-5311-2273</span></p>
+                    <p><i class="fas fa-envelope"></i> <span id="footerEmail">abogadoclaudiopalma.srt@gmail.com</span></p>
+                </div>
             </div>
             <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
                 <a href="/aviso-legal.html" style="color: #94a3b8; margin: 0 10px;">Aviso Legal</a>
                 <a href="/politica-privacidad.html" style="color: #94a3b8; margin: 0 10px;">Política de Privacidad</a>
                 <a href="/admin.html" style="color: #94a3b8; margin: 0 10px; opacity:0.5;">⚙️ Panel</a>
             </div>
-            <div class="footer-copyright"><p>&copy; 2024 Dr. Claudio Palma - Todos los derechos reservados</p></div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 Dr. Claudio Palma - Todos los derechos reservados</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        function cargarDatos() {
+        // ==============================================
+        // CARGAR TODOS LOS DATOS DESDE localStorage
+        // ==============================================
+        function cargarTodo() {
+            // Texto principal
             const texto = JSON.parse(localStorage.getItem('textoPrincipal'));
             if (texto) {
-                document.getElementById('mainTitle').innerText = texto.titulo || 'Dr. Claudio Palma';
-                document.getElementById('mainSubtitle').innerText = texto.subtitulo || '';
-                document.getElementById('mainDescription').innerText = texto.descripcion || '';
+                document.getElementById('mainTitle').textContent = texto.titulo || 'Dr. Claudio Palma';
+                document.getElementById('mainSubtitle').textContent = texto.subtitulo || '';
+                document.getElementById('mainDescription').textContent = texto.descripcion || '';
             }
 
-            const contacto = JSON.parse(localStorage.getItem('contacto'));
-            if (contacto) {
-                const w = contacto.whatsapp || '11-5311-2273';
-                const e = contacto.email || 'abogadoclaudiopalma.srt@gmail.com';
-                const d = contacto.direccion || 'Av. Corrientes 1234, CABA';
-                const h = contacto.horario || 'Con cita previa · Lun-Vie 9-19hs';
-
-                document.getElementById('contactWhatsapp').innerText = w;
-                document.getElementById('contactWhatsapp').href = `https://wa.me/549${w.replace(/[^0-9]/g, '')}`;
-                document.getElementById('whatsappFloat').href = `https://wa.me/549${w.replace(/[^0-9]/g, '')}`;
-                document.getElementById('contactEmail').innerText = e;
-                document.getElementById('contactEmail').href = `mailto:${e}`;
-                document.getElementById('contactAddress').innerText = d;
-                document.getElementById('contactHours').innerText = h;
-                document.getElementById('footerWhatsapp').innerText = w;
-                document.getElementById('footerEmail').innerText = e;
-            }
-
-            const foto = localStorage.getItem('fotoPerfil');
-            if (foto) {
-                document.getElementById('fotoProfesional').src = foto;
-                document.getElementById('fotoProfesional').style.display = 'block';
-            }
-
-            const casos = JSON.parse(localStorage.getItem('casos') || '[]');
-            const container = document.getElementById('casosContainer');
-            if (casos.length > 0) {
-                container.innerHTML = casos.slice(0, 6).map(c => `
-                    <div class="caso-card">
-                        <div class="caso-img">${c.foto ? `<img src="${c.foto}" alt="${c.titulo}">` : '<div style="height:100%; background: #e2e8f0;"></div>'}<span class="caso-badge">${c.area || 'Éxito'}</span></div>
-                        <div class="caso-content"><h3>${c.titulo}</h3><p>${c.descripcion}</p><div class="caso-resultado"><strong>Resultado:</strong> ${c.resultado}</div></div>
-             
+            // Biografía
+            const bio = localStorage.getItem('bio');
+            if (bio) document.getElementById('bioText
