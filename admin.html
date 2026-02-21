@@ -132,6 +132,7 @@
             border-radius: 40px;
             color: var(--primary);
             border: 1px solid var(--border);
+            cursor: pointer;
         }
 
         .grid-2 {
@@ -166,7 +167,8 @@
         }
 
         .input-group input,
-        .input-group textarea {
+        .input-group textarea,
+        .input-group select {
             width: 100%;
             padding: 16px;
             border: 1px solid var(--border);
@@ -176,7 +178,8 @@
         }
 
         .input-group input:focus,
-        .input-group textarea:focus {
+        .input-group textarea:focus,
+        .input-group select:focus {
             border-color: var(--gold);
             outline: none;
         }
@@ -197,6 +200,11 @@
             background: #eef3f9;
             color: var(--primary);
             border: 1px solid var(--border);
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 14px;
         }
 
         .casos-lista {
@@ -230,6 +238,23 @@
             gap: 10px;
             margin-top: 15px;
         }
+
+        .foto-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            margin: 15px auto;
+            display: none;
+        }
+
+        .preview-container {
+            text-align: center;
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -254,7 +279,7 @@
                     <h1>Dr. Claudio Palma</h1>
                     <span>Panel de control · Estudio jurídico</span>
                 </div>
-                <div class="user-badge" onclick="cerrarSesion()" style="cursor: pointer;">
+                <div class="user-badge" onclick="cerrarSesion()">
                     🚪 Cerrar sesión
                 </div>
             </div>
@@ -298,6 +323,30 @@
                         <input type="text" id="contactHours" value="Lunes a Viernes 9:00 a 19:00">
                     </div>
                     <button class="btn" onclick="guardarContacto()">💾 Guardar contacto</button>
+                </div>
+            </div>
+
+            <!-- NUEVA SECCIÓN: FOTO PROFESIONAL / LOGO -->
+            <div class="card" style="margin-bottom: 25px;">
+                <h2>📸 Foto profesional / Logo</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;">
+                    <div>
+                        <div class="input-group">
+                            <label>Imagen principal (foto de Claudio o logo)</label>
+                            <input type="file" id="fotoPerfil" accept="image/*" onchange="previewFotoPerfil(event)">
+                            <p style="font-size:13px; color:#64748b; margin-top:10px;">
+                                📌 Recomendado: imagen cuadrada, mínimo 300x300px
+                            </p>
+                        </div>
+                        <button class="btn" onclick="guardarFotoPerfil()" style="margin-top:15px;">
+                            💾 Guardar foto
+                        </button>
+                    </div>
+                    <div class="preview-container">
+                        <h4 style="margin-bottom:15px;">Vista previa</h4>
+                        <img id="previewPerfil" class="foto-preview" style="display: none;">
+                        <p id="sinFotoMsg" style="color:#94a3b8;">Sin imagen</p>
+                    </div>
                 </div>
             </div>
 
@@ -355,11 +404,39 @@
         const CONTRASENA = '2121ñ@rt';
         const WHATSAPP_ADMIN = '1153112273';
 
+        // Variables para la foto
+        let fotoPerfilActual = localStorage.getItem('fotoPerfil') || '';
+
         // Verificar sesión al cargar
         if (localStorage.getItem('sesion') === 'activa') {
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('panel').style.display = 'block';
             cargarDatosGuardados();
+        }
+
+        // Vista previa de foto de perfil
+        function previewFotoPerfil(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('previewPerfil').src = e.target.result;
+                    document.getElementById('previewPerfil').style.display = 'block';
+                    document.getElementById('sinFotoMsg').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Guardar foto de perfil
+        function guardarFotoPerfil() {
+            const foto = document.getElementById('previewPerfil').src;
+            if (foto && foto.startsWith('data:image')) {
+                localStorage.setItem('fotoPerfil', foto);
+                alert('✅ Foto guardada correctamente');
+            } else {
+                alert('❌ Primero seleccioná una imagen');
+            }
         }
 
         function verificarLogin() {
@@ -474,34 +551,4 @@
                         <button class="btn btn-small btn-secondary" onclick="eliminarCaso(${c.id})">🗑️ Eliminar</button>
                     </div>
                 </div>
-            `).join('');
-        }
-
-        function eliminarCaso(id) {
-            let casos = JSON.parse(localStorage.getItem('casos') || '[]');
-            casos = casos.filter(c => c.id !== id);
-            localStorage.setItem('casos', JSON.stringify(casos));
-            actualizarListaCasos();
-        }
-
-        function cargarDatosGuardados() {
-            const texto = JSON.parse(localStorage.getItem('textoPrincipal'));
-            if (texto) {
-                document.getElementById('mainTitle').value = texto.titulo || 'Dr. Claudio Palma';
-                document.getElementById('mainSubtitle').value = texto.subtitulo || '';
-                document.getElementById('mainDesc').value = texto.descripcion || '';
-            }
-
-            const contacto = JSON.parse(localStorage.getItem('contacto'));
-            if (contacto) {
-                document.getElementById('contactWhatsapp').value = contacto.whatsapp || '11-5311-2273';
-                document.getElementById('contactEmail').value = contacto.email || 'contacto@claudiopalma.com';
-                document.getElementById('contactAddress').value = contacto.direccion || 'Av. Corrientes 1234, CABA';
-                document.getElementById('contactHours').value = contacto.horario || 'Lunes a Viernes 9:00 a 19:00';
-            }
-
-            actualizarListaCasos();
-        }
-    </script>
-</body>
-                                                                                 </html>
+            `
