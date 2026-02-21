@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* (mismos estilos que tenías, se mantienen igual) */
         * {
             margin: 0;
             padding: 0;
@@ -37,10 +36,10 @@
             padding: 0 20px;
         }
 
-        /* WhatsApp flotante */
+        /* WhatsApp flotante original */
         .whatsapp-float {
             position: fixed;
-            bottom: 30px;
+            bottom: 100px;
             right: 30px;
             background: #25D366;
             color: white;
@@ -61,7 +60,198 @@
             transform: scale(1.1);
         }
 
-        /* Header */
+        /* Bot flotante profesional */
+        .bot-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            z-index: 101;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid var(--gold);
+        }
+
+        .bot-float:hover {
+            transform: scale(1.1);
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        /* Ventana del bot */
+        .bot-window {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 350px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            z-index: 102;
+            display: none;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .bot-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bot-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .bot-header h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .bot-header p {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .bot-body {
+            padding: 20px;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        .bot-message {
+            background: #f1f5f9;
+            padding: 12px 15px;
+            border-radius: 18px 18px 18px 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .bot-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .bot-option {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bot-option:hover {
+            border-color: var(--gold);
+            background: #fefcf5;
+            transform: translateX(5px);
+        }
+
+        .bot-option i {
+            color: var(--gold);
+            width: 20px;
+        }
+
+        .bot-input-group {
+            margin: 15px 0;
+        }
+
+        .bot-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            background: #f9fcff;
+        }
+
+        .bot-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .bot-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 5px 0;
+        }
+
+        .bot-btn:hover {
+            background: #0f4a70;
+        }
+
+        .bot-wa-btn {
+            display: block;
+            background: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: 600;
+            margin: 15px 0 10px;
+            font-size: 15px;
+        }
+
+        .bot-back {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 13px;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        .bot-back:hover {
+            color: var(--primary);
+        }
+
+        .bot-footer {
+            padding: 15px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        /* Resto de estilos de la página (se mantienen igual) */
         header {
             background: var(--primary);
             color: white;
@@ -121,7 +311,6 @@
             color: var(--gold);
         }
 
-        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, #1a4b6e 100%);
             color: white;
@@ -150,7 +339,6 @@
             margin-bottom: 20px;
         }
 
-        /* Secciones */
         section {
             padding: 80px 0;
         }
@@ -172,7 +360,6 @@
             margin: 15px auto 0;
         }
 
-        /* Grid de servicios */
         .servicios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -204,7 +391,6 @@
             margin-bottom: 15px;
         }
 
-        /* Grid de áreas */
         .areas-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -236,7 +422,6 @@
             font-size: 14px;
         }
 
-        /* Estadísticas */
         .stats {
             background: var(--primary);
             color: white;
@@ -256,7 +441,6 @@
             color: var(--gold);
         }
 
-        /* Sobre mí */
         .sobre-mi {
             background: white;
             padding: 60px 0;
@@ -271,7 +455,6 @@
             line-height: 1.8;
         }
 
-        /* Casos de éxito */
         .casos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -333,7 +516,6 @@
             color: var(--primary);
         }
 
-        /* Contacto */
         .contacto {
             background: var(--primary);
             color: white;
@@ -382,7 +564,6 @@
             overflow: hidden;
         }
 
-        /* Footer */
         footer {
             background: #0a1a2a;
             color: white;
@@ -453,14 +634,41 @@
             .contacto-grid {
                 grid-template-columns: 1fr;
             }
+
+            .bot-window {
+                width: 300px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- WhatsApp flotante -->
+    <!-- WhatsApp flotante original -->
     <a href="https://wa.me/5491153112273" class="whatsapp-float" target="_blank" id="whatsappFloat">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <!-- Bot flotante profesional -->
+    <div class="bot-float" onclick="toggleBot()">
+        <i class="fas fa-gavel"></i>
+    </div>
+
+    <!-- Ventana del bot -->
+    <div class="bot-window" id="botWindow">
+        <div class="bot-header">
+            <div class="bot-avatar">⚖️</div>
+            <div>
+                <h3>Dr. Claudio Palma</h3>
+                <p>Complete su consulta en 2 pasos</p>
+            </div>
+        </div>
+        <div class="bot-body" id="botBody">
+            <!-- El contenido se llena con JavaScript -->
+        </div>
+        <div class="bot-footer">
+            Consulta previa sin cargo · Respuesta por WhatsApp
+        </div>
+    </div>
 
     <!-- Header -->
     <header>
@@ -519,117 +727,4 @@
                 <div class="area-item"><h4>👪 Familiar</h4><ul><li>Divorcios</li><li>Cuota alimentaria</li><li>Régimen de visitas</li><li>Filiación</li></ul></div>
                 <div class="area-item"><h4>🔨 Laboral</h4><ul><li>Despidos</li><li>Indemnizaciones</li><li>Trabajo no registrado</li><li>Diferencias salariales</li></ul></div>
                 <div class="area-item"><h4>🩺 ART</h4><ul><li>Reclamos a la ART</li><li>Accidente in itinere</li><li>Enfermedades profesionales</li><li>Secuelas e incapacidad</li></ul></div>
-                <div class="area-item"><h4>🚗 Tránsito</h4><ul><li>Reclamo a seguros</li><li>Indemnización por lesiones</li><li>Daño material</li><li>Muerte por accidente</li></ul></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Estadísticas -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div><div class="stat-number" id="statCasos">650+</div><p>Casos exitosos</p></div>
-                <div><div class="stat-number" id="statAnos">15+</div><p>Años de experiencia</p></div>
-                <div><div class="stat-number" id="statDedicacion">100%</div><p>Dedicación exclusiva</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sobre mí (dinámico) -->
-    <section id="sobre-mi" class="sobre-mi">
-        <div class="container">
-            <h2 class="section-title">Sobre mí</h2>
-            <p id="bioTexto">Titular del Estudio Jurídico, especializado en derecho laboral, civil y de familia. Con más de 15 años de trayectoria, mi compromiso es brindar un servicio personalizado, ético y eficiente.</p>
-        </div>
-    </section>
-
-    <!-- Casos de éxito (dinámicos) -->
-    <section id="casos">
-        <div class="container">
-            <h2 class="section-title">Casos de éxito</h2>
-            <div id="casosContainer" class="casos-grid"></div>
-        </div>
-    </section>
-
-    <!-- Contacto -->
-    <section id="contacto" class="contacto">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Contacto</h2>
-            <div class="contacto-grid">
-                <div class="contacto-info">
-                    <div class="contacto-card">
-                        <i class="fab fa-whatsapp"></i>
-                        <h3>WhatsApp</h3>
-                        <a href="https://wa.me/5491153112273" class="contacto-link" id="contactWhatsapp">11-5311-2273</a>
-                        <p class="contacto-desc">Respuesta rápida</p>
-                    </div>
-                    <div class="contacto-card">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
-                        <a href="mailto:abogadoclaudiopalma.srt@gmail.com" class="contacto-link" id="contactEmail">abogadoclaudiopalma.srt@gmail.com</a>
-                    </div>
-                    <div class="contacto-card">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>Oficina</h3>
-                        <p class="contacto-link" id="contactAddress">Av. Corrientes 1234, CABA</p>
-                        <p class="contacto-desc" id="contactHours">Con cita previa · Lun-Vie 9-19hs</p>
-                    </div>
-                </div>
-                <div class="contacto-mapa" id="contactMap"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Claudio Palma</h3>
-                    <p>Abogado</p>
-                    <p class="footer-matricula">T° XXVI F° 138 C.A.L.Z</p>
-                </div>
-                <div class="footer-areas">
-                    <h4>Áreas</h4>
-                    <ul>
-                        <li>Derecho Civil</li>
-                        <li>Derecho Comercial</li>
-                        <li>Derecho Familiar</li>
-                        <li>Derecho Laboral</li>
-                        <li>Accidentes de Trabajo</li>
-                        <li>Accidentes de Tránsito</li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h4>Contacto</h4>
-                    <p><i class="fab fa-whatsapp"></i> <span id="footerWhatsapp">11-5311-2273</span></p>
-                    <p><i class="fas fa-envelope"></i> <span id="footerEmail">abogadoclaudiopalma.srt@gmail.com</span></p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                <a href="/aviso-legal.html" style="color: #94a3b8; margin: 0 10px;">Aviso Legal</a>
-                <a href="/politica-privacidad.html" style="color: #94a3b8; margin: 0 10px;">Política de Privacidad</a>
-                <a href="/admin.html" style="color: #94a3b8; margin: 0 10px; opacity:0.5;">⚙️ Panel</a>
-            </div>
-            <div class="footer-copyright">
-                <p>&copy; 2024 Dr. Claudio Palma - Todos los derechos reservados</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // ==============================================
-        // CARGAR TODOS LOS DATOS DESDE localStorage
-        // ==============================================
-        function cargarTodo() {
-            // Texto principal
-            const texto = JSON.parse(localStorage.getItem('textoPrincipal'));
-            if (texto) {
-                document.getElementById('mainTitle').textContent = texto.titulo || 'Dr. Claudio Palma';
-                document.getElementById('mainSubtitle').textContent = texto.subtitulo || '';
-                document.getElementById('mainDescription').textContent = texto.descripcion || '';
-            }
-
-            // Biografía
-            const bio = localStorage.getItem('bio');
-            if (bio) document.getElementById('bioText
+                <div class="area-item"><h4>🚗 Tránsito</h4><ul><li>Reclamo a seguros</li><li>Indemnización por lesiones</li><li>Daño material</li><li>Muerte por accident
