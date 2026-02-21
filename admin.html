@@ -3,454 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Claudio Palma · Panel Profesional</title>
+    <title>Dr. Claudio Palma · Panel</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-        }
-
-        :root {
-            --primary: #0b3b5c;
-            --gold: #d0a933;
-            --bg: #f4f7fc;
-            --card: #ffffff;
-            --text: #1e293b;
-            --border: #e0e9f2;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            padding: 30px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* LOGIN */
-        .login-screen {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 85vh;
-        }
-
-        .login-card {
-            background: var(--card);
-            padding: 50px;
-            border-radius: 40px;
-            box-shadow: 0 30px 60px -15px rgba(11, 59, 92, 0.2);
-            width: 100%;
-            max-width: 440px;
-            border: 1px solid rgba(208, 169, 51, 0.15);
-        }
-
-        .login-card h2 {
-            color: var(--primary);
-            font-size: 34px;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .login-card p {
-            color: #5f6b7a;
-            margin-bottom: 35px;
-            font-size: 16px;
-        }
-
-        .login-input {
-            width: 100%;
-            padding: 18px;
-            margin: 12px 0;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            font-size: 16px;
-            background: #fafdff;
-        }
-
-        .login-input:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 4px rgba(208, 169, 51, 0.15);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 18px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 24px;
-            font-size: 18px;
-            font-weight: 500;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .login-btn:hover {
-            background: #0f4a70;
-        }
-
-        /* PANEL */
-        .panel {
-            display: none;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 25px 35px;
-            background: var(--card);
-            border-radius: 40px;
-            border: 1px solid var(--border);
-        }
-
-        .logo h1 {
-            color: var(--primary);
-            font-size: 28px;
-            font-weight: 500;
-        }
-
-        .logo span {
-            color: var(--gold);
-            font-size: 14px;
-            margin-top: 6px;
-            display: block;
-        }
-
-        .user-badge {
-            background: #edf2f9;
-            padding: 12px 25px;
-            border-radius: 40px;
-            color: var(--primary);
-            border: 1px solid var(--border);
-            cursor: pointer;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .card {
-            background: var(--card);
-            border-radius: 35px;
-            padding: 30px;
-            border: 1px solid var(--border);
-        }
-
-        .card h2 {
-            color: var(--primary);
-            font-size: 22px;
-            margin-bottom: 25px;
-        }
-
-        .input-group {
-            margin-bottom: 22px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #4a5a6a;
-        }
-
-        .input-group input,
-        .input-group textarea,
-        .input-group select {
-            width: 100%;
-            padding: 16px;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            font-size: 15px;
-            background: #f9fdff;
-        }
-
-        .input-group input:focus,
-        .input-group textarea:focus,
-        .input-group select:focus {
-            border-color: var(--gold);
-            outline: none;
-        }
-
-        .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 16px 30px;
-            border-radius: 40px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .btn-secondary {
-            background: #eef3f9;
-            color: var(--primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-small {
-            padding: 10px 20px;
-            font-size: 14px;
-        }
-
-        .casos-lista {
-            margin-top: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .caso-item {
-            background: #f8fbfe;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--gold);
-        }
-
-        .caso-item h4 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .caso-foto {
-            max-width: 100px;
-            max-height: 100px;
-            border-radius: 12px;
-            margin-top: 10px;
-        }
-
-        .acciones {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .foto-preview {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--gold);
-            margin: 15px auto;
-            display: none;
-        }
-
-        .preview-container {
-            text-align: center;
-            background: #f1f5f9;
-            border-radius: 20px;
-            padding: 20px;
-        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
+        :root { --primary:#0b3b5c; --gold:#d0a933; --bg:#f4f7fc; --card:#fff; --text:#1e293b; --border:#e0e9f2; }
+        body { background:var(--bg); color:var(--text); padding:30px; }
+        .container { max-width:1400px; margin:0 auto; }
+        .login-screen { display:flex; align-items:center; justify-content:center; min-height:85vh; }
+        .login-card { background:var(--card); padding:50px; border-radius:40px; box-shadow:0 30px 60px -15px rgba(11,59,92,0.2); width:100%; max-width:440px; border:1px solid rgba(208,169,51,0.15); }
+        .login-card h2 { color:var(--primary); font-size:34px; font-weight:500; margin-bottom:10px; }
+        .login-card p { color:#5f6b7a; margin-bottom:35px; }
+        .login-input { width:100%; padding:18px; margin:12px 0; border:1px solid var(--border); border-radius:24px; font-size:16px; background:#fafdff; }
+        .login-input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 4px rgba(208,169,51,0.15); }
+        .login-btn { width:100%; padding:18px; background:var(--primary); color:white; border:none; border-radius:24px; font-size:18px; font-weight:500; cursor:pointer; margin-top:20px; }
+        .login-btn:hover { background:#0f4a70; }
+        .panel { display:none; }
+        .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; padding:25px 35px; background:var(--card); border-radius:40px; border:1px solid var(--border); }
+        .logo h1 { color:var(--primary); font-size:28px; font-weight:500; }
+        .logo span { color:var(--gold); font-size:14px; margin-top:6px; display:block; }
+        .user-badge { background:#edf2f9; padding:12px 25px; border-radius:40px; color:var(--primary); border:1px solid var(--border); cursor:pointer; }
+        .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:25px; margin-bottom:25px; }
+        .card { background:var(--card); border-radius:35px; padding:30px; border:1px solid var(--border); }
+        .card h2 { color:var(--primary); font-size:22px; margin-bottom:25px; }
+        .input-group { margin-bottom:22px; }
+        .input-group label { display:block; margin-bottom:8px; font-weight:500; color:#4a5a6a; }
+        .input-group input, .input-group textarea, .input-group select { width:100%; padding:16px; border:1px solid var(--border); border-radius:24px; font-size:15px; background:#f9fdff; }
+        .input-group input:focus, .input-group textarea:focus, .input-group select:focus { border-color:var(--gold); outline:none; }
+        .btn { background:var(--primary); color:white; border:none; padding:16px 30px; border-radius:40px; font-size:16px; font-weight:500; cursor:pointer; margin-top:10px; }
+        .btn-secondary { background:#eef3f9; color:var(--primary); border:1px solid var(--border); }
+        .btn-small { padding:10px 20px; font-size:14px; }
+        .casos-lista { margin-top:20px; max-height:400px; overflow-y:auto; }
+        .caso-item { background:#f8fbfe; border-radius:20px; padding:20px; margin-bottom:15px; border-left:4px solid var(--gold); }
+        .caso-item h4 { color:var(--primary); margin-bottom:10px; }
+        .caso-foto { max-width:100px; max-height:100px; border-radius:12px; margin-top:10px; }
+        .acciones { display:flex; gap:10px; margin-top:15px; }
+        .foto-preview { width:150px; height:150px; border-radius:50%; object-fit:cover; border:3px solid var(--gold); margin:15px auto; display:none; }
+        .preview-container { text-align:center; background:#f1f5f9; border-radius:20px; padding:20px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- LOGIN SCREEN -->
         <div id="loginScreen" class="login-screen">
             <div class="login-card">
                 <h2>Dr. Claudio Palma</h2>
-                <p>Panel de administración profesional</p>
+                <p>Panel de administración</p>
                 <input type="text" id="username" class="login-input" placeholder="Usuario" value="dr.palma">
                 <input type="password" id="password" class="login-input" placeholder="Contraseña">
                 <button class="login-btn" onclick="verificarLogin()">Ingresar</button>
-                <p id="loginError" style="color: #ef4444; margin-top: 20px;"></p>
+                <p id="loginError" style="color:#ef4444; margin-top:20px;"></p>
             </div>
         </div>
 
-        <!-- PANEL PRINCIPAL -->
         <div id="panel" class="panel">
-            <!-- HEADER -->
             <div class="header">
-                <div class="logo">
-                    <h1>Dr. Claudio Palma</h1>
-                    <span>Panel de control · Estudio jurídico</span>
-                </div>
-                <div class="user-badge" onclick="cerrarSesion()">
-                    🚪 Cerrar sesión
-                </div>
+                <div class="logo"><h1>Dr. Claudio Palma</h1><span>Panel de control</span></div>
+                <div class="user-badge" onclick="cerrarSesion()">🚪 Cerrar sesión</div>
             </div>
 
             <div class="grid-2">
-                <!-- EDITOR DE TEXTO DE LA PÁGINA PRINCIPAL -->
                 <div class="card">
-                    <h2>📝 Editar texto principal</h2>
-                    <div class="input-group">
-                        <label>Presentación (título principal)</label>
-                        <input type="text" id="mainTitle" value="Dr. Claudio Palma">
-                    </div>
-                    <div class="input-group">
-                        <label>Subtítulo / Especialidades</label>
-                        <textarea id="mainSubtitle">Derecho Civil · Comercial · Familiar · Laboral · Accidentes</textarea>
-                    </div>
-                    <div class="input-group">
-                        <label>Descripción profesional</label>
-                        <textarea id="mainDesc">Más de 15 años defendiendo los derechos de los trabajadores y las familias con compromiso y ética profesional.</textarea>
-                    </div>
-                    <button class="btn" onclick="guardarTextoPrincipal()">💾 Guardar cambios</button>
+                    <h2>📝 Texto principal</h2>
+                    <div class="input-group"><label>Título</label><input type="text" id="mainTitle" value="Dr. Claudio Palma"></div>
+                    <div class="input-group"><label>Subtítulo</label><textarea id="mainSubtitle">Derecho Civil · Comercial · Familiar · Laboral · Accidentes</textarea></div>
+                    <div class="input-group"><label>Descripción</label><textarea id="mainDesc">Más de 15 años defendiendo los derechos de los trabajadores y las familias con compromiso y ética profesional.</textarea></div>
+                    <button class="btn" onclick="guardarTextoPrincipal()">💾 Guardar</button>
                 </div>
-
-                <!-- EDITOR DE CONTACTO Y UBICACIÓN -->
                 <div class="card">
-                    <h2>📍 Contacto y ubicación</h2>
-                    <div class="input-group">
-                        <label>Teléfono / WhatsApp</label>
-                        <input type="text" id="contactWhatsapp" value="11-5311-2273">
-                    </div>
-                    <div class="input-group">
-                        <label>Email</label>
-                        <input type="email" id="contactEmail" value="abogadoclaudiopalma.srt@gmail.com">
-                    </div>
-                    <div class="input-group">
-                        <label>Dirección / Oficina</label>
-                        <input type="text" id="contactAddress" value="Av. Corrientes 1234, CABA">
-                    </div>
-                    <div class="input-group">
-                        <label>Horario de atención</label>
-                        <input type="text" id="contactHours" value="Lunes a Viernes 9:00 a 19:00">
-                    </div>
-                    <button class="btn" onclick="guardarContacto()">💾 Guardar contacto</button>
+                    <h2>📍 Contacto</h2>
+                    <div class="input-group"><label>WhatsApp</label><input type="text" id="contactWhatsapp" value="11-5311-2273"></div>
+                    <div class="input-group"><label>Email</label><input type="email" id="contactEmail" value="abogadoclaudiopalma.srt@gmail.com"></div>
+                    <div class="input-group"><label>Dirección</label><input type="text" id="contactAddress" value="Av. Corrientes 1234, CABA"></div>
+                    <div class="input-group"><label>Horario</label><input type="text" id="contactHours" value="Lunes a Viernes 9:00 a 19:00"></div>
+                    <button class="btn" onclick="guardarContacto()">💾 Guardar</button>
                 </div>
             </div>
 
-            <!-- NUEVA SECCIÓN: FOTO PROFESIONAL / LOGO -->
-            <div class="card" style="margin-bottom: 25px;">
-                <h2>📸 Foto profesional / Logo</h2>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center;">
-                    <div>
-                        <div class="input-group">
-                            <label>Imagen principal (foto de Claudio o logo)</label>
-                            <input type="file" id="fotoPerfil" accept="image/*" onchange="previewFotoPerfil(event)">
-                            <p style="font-size:13px; color:#64748b; margin-top:10px;">
-                                📌 Recomendado: imagen cuadrada, mínimo 300x300px
-                            </p>
-                        </div>
-                        <button class="btn" onclick="guardarFotoPerfil()" style="margin-top:15px;">
-                            💾 Guardar foto
-                        </button>
-                    </div>
-                    <div class="preview-container">
-                        <h4 style="margin-bottom:15px;">Vista previa</h4>
-                        <img id="previewPerfil" class="foto-preview" style="display: none;">
-                        <p id="sinFotoMsg" style="color:#94a3b8;">Sin imagen</p>
-                    </div>
+            <div class="card" style="margin-bottom:25px;">
+                <h2>📸 Foto profesional</h2>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px;">
+                    <div><input type="file" id="fotoPerfil" accept="image/*" onchange="previewFotoPerfil(event)"><button class="btn" onclick="guardarFotoPerfil()">💾 Guardar</button></div>
+                    <div class="preview-container"><h4>Vista previa</h4><img id="previewPerfil" class="foto-preview"><p id="sinFotoMsg">Sin imagen</p></div>
                 </div>
             </div>
 
-            <!-- PUBLICAR NUEVO CASO -->
-            <div class="card" style="margin-bottom: 25px;">
-                <h2>📸 Publicar nuevo caso</h2>
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+            <div class="card" style="margin-bottom:25px;">
+                <h2>📸 Publicar caso</h2>
+                <div style="display:grid; grid-template-columns:2fr 1fr; gap:25px;">
                     <div>
-                        <div class="input-group">
-                            <label>Área del caso</label>
-                            <select id="casoArea" style="width:100%; padding:16px; border-radius:24px; border:1px solid var(--border);">
-                                <option>Civil</option>
-                                <option>Comercial</option>
-                                <option>Familiar</option>
-                                <option>Laboral</option>
-                                <option>ART</option>
-                                <option>Tránsito</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label>Título del caso</label>
-                            <input type="text" id="casoTitulo" placeholder="Ej: Indemnización por despido">
-                        </div>
-                        <div class="input-group">
-                            <label>Descripción</label>
-                            <textarea id="casoDesc" placeholder="Detalles del caso..."></textarea>
-                        </div>
-                        <div class="input-group">
-                            <label>Resultado obtenido</label>
-                            <textarea id="casoResult" placeholder="Ej: $2.500.000 de indemnización"></textarea>
-                        </div>
+                        <select id="casoArea"><option>Civil</option><option>Comercial</option><option>Familiar</option><option>Laboral</option><option>ART</option><option>Tránsito</option></select>
+                        <input type="text" id="casoTitulo" placeholder="Título">
+                        <textarea id="casoDesc" placeholder="Descripción"></textarea>
+                        <textarea id="casoResult" placeholder="Resultado"></textarea>
                     </div>
-                    <div>
-                        <div class="input-group">
-                            <label>Foto del caso</label>
-                            <input type="file" id="casoFoto" accept="image/*" onchange="previewCasoFoto(event)">
-                            <img id="preview" style="max-width:100%; max-height:200px; margin-top:15px; border-radius:15px; display:none;">
-                        </div>
-                    </div>
+                    <div><input type="file" id="casoFoto" accept="image/*" onchange="previewCasoFoto(event)"><img id="preview" style="max-width:100%; max-height:200px; margin-top:15px; border-radius:15px; display:none;"></div>
                 </div>
-                <button class="btn" onclick="publicarCaso()" style="width:100%; margin-top:15px;">📤 PUBLICAR CASO</button>
+                <button class="btn" onclick="publicarCaso()" style="width:100%; margin-top:15px;">📤 PUBLICAR</button>
             </div>
 
-            <!-- CASOS PUBLICADOS -->
-            <div class="card">
-                <h2>📋 Casos publicados</h2>
-                <div class="casos-lista" id="casosList"></div>
-            </div>
+            <div class="card"><h2>📋 Casos</h2><div class="casos-lista" id="casosList"></div></div>
         </div>
     </div>
 
     <script>
-        // CREDENCIALES
-        const USUARIO = 'dr.palma';
-        const CONTRASENA = '2121ñ@rt';
-        const WHATSAPP_ADMIN = '1153112273';
-
-        // Variables para la foto
+        const USUARIO = 'dr.palma', CONTRASENA = '2121ñ@rt';
         let fotoPerfilActual = localStorage.getItem('fotoPerfil') || '';
 
-        // Verificar sesión al cargar
         if (localStorage.getItem('sesion') === 'activa') {
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('panel').style.display = 'block';
             cargarDatosGuardados();
         }
 
-        // Vista previa de foto de perfil
         function previewFotoPerfil(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = (e) => {
-                    document.getElementById('previewPerfil').src = e.target.result;
-                    document.getElementById('previewPerfil').style.display = 'block';
-                    document.getElementById('sinFotoMsg').style.display = 'none';
-                };
+                reader.onload = (e) => { document.getElementById('previewPerfil').src = e.target.result; document.getElementById('previewPerfil').style.display = 'block'; document.getElementById('sinFotoMsg').style.display = 'none'; };
                 reader.readAsDataURL(file);
             }
         }
 
-        // Guardar foto de perfil
         function guardarFotoPerfil() {
             const foto = document.getElementById('previewPerfil').src;
-            if (foto && foto.startsWith('data:image')) {
-                localStorage.setItem('fotoPerfil', foto);
-                alert('✅ Foto guardada correctamente');
-            } else {
-                alert('❌ Primero seleccioná una imagen');
-            }
+            if (foto && foto.startsWith('data:image')) { localStorage.setItem('fotoPerfil', foto); alert('✅ Foto guardada'); } 
+            else alert('❌ Seleccioná una imagen');
         }
 
         function verificarLogin() {
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
-
             if (user === USUARIO && pass === CONTRASENA) {
                 localStorage.setItem('sesion', 'activa');
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('panel').style.display = 'block';
                 cargarDatosGuardados();
-            } else {
-                document.getElementById('loginError').innerText = '❌ Usuario o contraseña incorrectos';
-            }
+            } else document.getElementById('loginError').innerText = '❌ Usuario o contraseña incorrectos';
         }
 
         function cerrarSesion() {
@@ -460,22 +147,13 @@
         }
 
         function guardarTextoPrincipal() {
-            const data = {
-                titulo: document.getElementById('mainTitle').value,
-                subtitulo: document.getElementById('mainSubtitle').value,
-                descripcion: document.getElementById('mainDesc').value
-            };
+            const data = { titulo: document.getElementById('mainTitle').value, subtitulo: document.getElementById('mainSubtitle').value, descripcion: document.getElementById('mainDesc').value };
             localStorage.setItem('textoPrincipal', JSON.stringify(data));
-            alert('✅ Texto principal guardado');
+            alert('✅ Texto guardado');
         }
 
         function guardarContacto() {
-            const data = {
-                whatsapp: document.getElementById('contactWhatsapp').value,
-                email: document.getElementById('contactEmail').value,
-                direccion: document.getElementById('contactAddress').value,
-                horario: document.getElementById('contactHours').value
-            };
+            const data = { whatsapp: document.getElementById('contactWhatsapp').value, email: document.getElementById('contactEmail').value, direccion: document.getElementById('contactAddress').value, horario: document.getElementById('contactHours').value };
             localStorage.setItem('contacto', JSON.stringify(data));
             alert('✅ Contacto guardado');
         }
@@ -484,71 +162,45 @@
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = (e) => {
-                    document.getElementById('preview').src = e.target.result;
-                    document.getElementById('preview').style.display = 'block';
-                };
+                reader.onload = (e) => { document.getElementById('preview').src = e.target.result; document.getElementById('preview').style.display = 'block'; };
                 reader.readAsDataURL(file);
             }
         }
 
         function publicarCaso() {
-            const titulo = document.getElementById('casoTitulo').value;
-            const area = document.getElementById('casoArea').value;
-            const desc = document.getElementById('casoDesc').value;
-            const res = document.getElementById('casoResult').value;
-
-            if (!titulo || !area || !desc || !res) {
-                alert('❌ Completá todos los campos');
-                return;
-            }
-
+            const titulo = document.getElementById('casoTitulo').value, area = document.getElementById('casoArea').value, desc = document.getElementById('casoDesc').value, res = document.getElementById('casoResult').value;
+            if (!titulo || !area || !desc || !res) return alert('❌ Completá todo');
             const foto = document.getElementById('casoFoto').files[0];
-            if (foto) {
-                const reader = new FileReader();
-                reader.onload = (e) => guardarCaso(e.target.result);
-                reader.readAsDataURL(foto);
-            } else {
-                guardarCaso('');
-            }
+            if (foto) { const reader = new FileReader(); reader.onload = (e) => guardarCaso(e.target.result); reader.readAsDataURL(foto); } else guardarCaso('');
         }
 
         function guardarCaso(foto) {
             let casos = JSON.parse(localStorage.getItem('casos') || '[]');
-            casos.unshift({
-                id: Date.now(),
-                area: document.getElementById('casoArea').value,
-                titulo: document.getElementById('casoTitulo').value,
-                descripcion: document.getElementById('casoDesc').value,
-                resultado: document.getElementById('casoResult').value,
-                foto: foto,
-                fecha: new Date().toLocaleString()
-            });
+            casos.unshift({ id: Date.now(), area: document.getElementById('casoArea').value, titulo: document.getElementById('casoTitulo').value, descripcion: document.getElementById('casoDesc').value, resultado: document.getElementById('casoResult').value, foto: foto, fecha: new Date().toLocaleString() });
             localStorage.setItem('casos', JSON.stringify(casos));
-            
-            // Limpiar
-            document.getElementById('casoTitulo').value = '';
-            document.getElementById('casoDesc').value = '';
-            document.getElementById('casoResult').value = '';
-            document.getElementById('casoFoto').value = '';
-            document.getElementById('preview').style.display = 'none';
-            
-            actualizarListaCasos();
-            alert('✅ Caso publicado');
+            document.getElementById('casoTitulo').value = ''; document.getElementById('casoDesc').value = ''; document.getElementById('casoResult').value = ''; document.getElementById('casoFoto').value = ''; document.getElementById('preview').style.display = 'none';
+            actualizarListaCasos(); alert('✅ Caso publicado');
         }
 
         function actualizarListaCasos() {
             const casos = JSON.parse(localStorage.getItem('casos') || '[]');
-            const lista = document.getElementById('casosList');
-            lista.innerHTML = casos.map(c => `
-                <div class="caso-item">
-                    <h4>${c.titulo} <small style="font-weight:normal; color:#64748b;">(${c.area})</small></h4>
-                    <p><strong>Descripción:</strong> ${c.descripcion}</p>
-                    <p><strong>Resultado:</strong> ${c.resultado}</p>
-                    ${c.foto ? `<img src="${c.foto}" class="caso-foto">` : ''}
-                    <small style="color:#64748b;">📅 ${c.fecha}</small>
-                    <div class="acciones">
-                        <button class="btn btn-small btn-secondary" onclick="eliminarCaso(${c.id})">🗑️ Eliminar</button>
-                    </div>
-                </div>
-     
+            document.getElementById('casosList').innerHTML = casos.map(c => `<div class="caso-item"><h4>${c.titulo} <small>(${c.area})</small></h4><p><strong>Descripción:</strong> ${c.descripcion}</p><p><strong>Resultado:</strong> ${c.resultado}</p>${c.foto ? `<img src="${c.foto}" class="caso-foto">` : ''}<small>📅 ${c.fecha}</small><div class="acciones"><button class="btn btn-small btn-secondary" onclick="eliminarCaso(${c.id})">🗑️ Eliminar</button></div></div>`).join('');
+        }
+
+        function eliminarCaso(id) {
+            let casos = JSON.parse(localStorage.getItem('casos') || '[]');
+            localStorage.setItem('casos', JSON.stringify(casos.filter(c => c.id !== id)));
+            actualizarListaCasos();
+        }
+
+        function cargarDatosGuardados() {
+            const texto = JSON.parse(localStorage.getItem('textoPrincipal'));
+            if (texto) { document.getElementById('mainTitle').value = texto.titulo; document.getElementById('mainSubtitle').value = texto.subtitulo; document.getElementById('mainDesc').value = texto.descripcion; }
+            const contacto = JSON.parse(localStorage.getItem('contacto'));
+            if (contacto) { document.getElementById('contactWhatsapp').value = contacto.whatsapp; document.getElementById('contactEmail').value = contacto.email; document.getElementById('contactAddress').value = contacto.direccion; document.getElementById('contactHours').value = contacto.horario; }
+            if (fotoPerfilActual) { document.getElementById('previewPerfil').src = fotoPerfilActual; document.getElementById('previewPerfil').style.display = 'block'; document.getElementById('sinFotoMsg').style.display = 'none'; }
+            actualizarListaCasos();
+        }
+    </script>
+</body>
+</html>
