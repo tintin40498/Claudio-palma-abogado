@@ -3,65 +3,496 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Claudio Palma | Abogado</title>
+    <title>Dr. Claudio Palma · Estudio Jurídico</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+        }
+
+        :root {
+            --primary: #0b3b5c;
+            --gold: #d0a933;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Header */
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .logo p {
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a4b6e 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* Secciones */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+            margin: 15px auto 0;
+        }
+
+        /* Grid de servicios */
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .servicio-card {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .servicio-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .servicio-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .servicio-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Grid de áreas */
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .area-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .area-item h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .area-item ul {
+            list-style: none;
+            color: var(--text-light);
+        }
+
+        .area-item li {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        /* Estadísticas */
+        .stats {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* Casos de éxito */
+        .casos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .caso-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
+        }
+
+        .caso-img {
+            height: 200px;
+            background: #e2e8f0;
+            position: relative;
+        }
+
+        .caso-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .caso-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--gold);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .caso-content {
+            padding: 25px;
+        }
+
+        .caso-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .caso-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .caso-resultado {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        /* Contacto */
+        .contacto {
+            background: var(--primary);
+            color: white;
+        }
+
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contacto-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .contacto-card {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contacto-card i {
+            font-size: 24px;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .contacto-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .contacto-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+        }
+
+        .contacto-mapa {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a1a2a;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            color: var(--gold);
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .footer-matricula {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .footer-areas ul {
+            list-style: none;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-areas li {
+            margin: 8px 0;
+        }
+
+        .footer-contact p {
+            margin: 10px 0;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .contacto-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- WhatsApp Flotante -->
-    <a href="https://wa.me/5491153112273" class="whatsapp-float" target="_blank">
+    <!-- WhatsApp flotante -->
+    <a href="https://wa.me/5491153112273" class="whatsapp-float" target="_blank" id="whatsappFloat">
         <i class="fab fa-whatsapp"></i>
-        <span>11-5311-2273</span>
     </a>
 
     <!-- Header -->
     <header>
-        <nav class="navbar">
-            <div class="logo-container">
-                <div class="logo">CLAUDIO PALMA</div>
-                <div class="logo-sub">ABOGADO</div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1 id="mainTitle">Dr. Claudio Palma</h1>
+                    <p id="mainSubtitle">Derecho Civil · Comercial · Familiar · Laboral · Accidentes</p>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#areas">Áreas</a></li>
+                        <li><a href="#casos">Casos</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#areas">Áreas</a></li>
-                <li><a href="#casos">Casos</a></li>
-                <li><a href="#sobre-mi">Estudio</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+        </div>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero / Inicio -->
     <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>Dr. <span class="highlight">Claudio Palma</span></h1>
-            <p class="hero-subtitle">Derecho Civil • Comercial • Familiar • Laboral</p>
-            <p class="hero-subtitle">Accidentes de Trabajo • Accidentes de Tránsito</p>
-            <div class="hero-cta">
-                <a href="https://wa.me/5491153112273" class="btn btn-whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Asesorate al 11-5311-2273
-                </a>
-                <a href="#areas" class="btn btn-outline">Mis áreas</a>
+        <div class="container">
+            <span class="hero-badge">T° XXVI F° 138 C.A.L.Z</span>
+            <h2>Más de 15 años defendiendo</h2>
+            <p id="mainDescription">los derechos de los trabajadores y las familias con compromiso y ética profesional</p>
+        </div>
+    </section>
+
+    <!-- Servicios destacados -->
+    <section id="servicios">
+        <div class="container">
+            <h2 class="section-title">Áreas de práctica</h2>
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <div class="servicio-icon">⚖️</div>
+                    <h3>Derecho Civil</h3>
+                    <p>Contratos, propiedades, sucesiones, daños y perjuicios</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">🏢</div>
+                    <h3>Derecho Comercial</h3>
+                    <p>Sociedades, contratos comerciales, Pymes, cobro de deudas</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">👪</div>
+                    <h3>Derecho Familiar</h3>
+                    <p>Divorcios, cuota alimentaria, régimen de visitas, filiación</p>
+                </div>
+                <div class="servicio-card">
+                    <div class="servicio-icon">🔨</div>
+                    <h3>Derecho Laboral</h3>
+                    <p>Despidos, indemnizaciones, trabajo no registrado</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Áreas -->
-    <section id="areas" class="especialidades">
+    <!-- Áreas detalladas -->
+    <section id="areas" style="background: #f1f5f9;">
         <div class="container">
-            <div class="section-header">
-                <h2>Áreas de Práctica</h2>
-                <p>Más de 15 años defendiendo tus derechos</p>
-            </div>
-            
-            <div class="especialidades-grid">
-                <div class="especialidad-card">
-                    <div class="card-icon"><i class="fas fa-file-signature"></i></div>
-                    <h3>Derecho Civil</h3>
+            <h2 class="section-title">Especialidades</h2>
+            <div class="areas-grid">
+                <div class="area-item">
+                    <h4>⚖️ Civil</h4>
                     <ul>
                         <li>Contratos</li>
                         <li>Propiedades</li>
@@ -69,9 +500,8 @@
                         <li>Daños y perjuicios</li>
                     </ul>
                 </div>
-                <div class="especialidad-card">
-                    <div class="card-icon"><i class="fas fa-building"></i></div>
-                    <h3>Derecho Comercial</h3>
+                <div class="area-item">
+                    <h4>🏢 Comercial</h4>
                     <ul>
                         <li>Sociedades</li>
                         <li>Contratos comerciales</li>
@@ -79,9 +509,8 @@
                         <li>Cobro de deudas</li>
                     </ul>
                 </div>
-                <div class="especialidad-card">
-                    <div class="card-icon"><i class="fas fa-family"></i></div>
-                    <h3>Derecho Familiar</h3>
+                <div class="area-item">
+                    <h4>👪 Familiar</h4>
                     <ul>
                         <li>Divorcios</li>
                         <li>Cuota alimentaria</li>
@@ -89,9 +518,8 @@
                         <li>Filiación</li>
                     </ul>
                 </div>
-                <div class="especialidad-card">
-                    <div class="card-icon"><i class="fas fa-briefcase"></i></div>
-                    <h3>Derecho Laboral</h3>
+                <div class="area-item">
+                    <h4>🔨 Laboral</h4>
                     <ul>
                         <li>Despidos</li>
                         <li>Indemnizaciones</li>
@@ -99,9 +527,8 @@
                         <li>Diferencias salariales</li>
                     </ul>
                 </div>
-                <div class="especialidad-card destacada">
-                    <div class="card-icon"><i class="fas fa-hard-hat"></i></div>
-                    <h3>Accidentes de Trabajo</h3>
+                <div class="area-item">
+                    <h4>🩺 ART</h4>
                     <ul>
                         <li>Reclamos a la ART</li>
                         <li>Accidente in itinere</li>
@@ -109,9 +536,8 @@
                         <li>Secuelas e incapacidad</li>
                     </ul>
                 </div>
-                <div class="especialidad-card destacada">
-                    <div class="card-icon"><i class="fas fa-car-crash"></i></div>
-                    <h3>Accidentes de Tránsito</h3>
+                <div class="area-item">
+                    <h4>🚗 Tránsito</h4>
                     <ul>
                         <li>Reclamo a seguros</li>
                         <li>Indemnización por lesiones</li>
@@ -123,87 +549,32 @@
         </div>
     </section>
 
-    <!-- Foto del Dr. Claudio Palma -->
-    <section style="padding: 60px 20px; text-align: center; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);">
+    <!-- Estadísticas -->
+    <section class="stats">
         <div class="container">
-            <img src="https://raw.githubusercontent.com/tintin40498/Claudio-palma-abogado/main/images/dr-palma.jpg" 
-                 alt="Dr. Claudio Palma" 
-                 style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #fbbf24; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-bottom: 25px;">
-            <h2 style="color: #0a1a2f; font-size: 2.2rem; margin-bottom: 10px; font-weight: 700;">Dr. Claudio Palma</h2>
-            <p style="color: #fbbf24; font-size: 1.3rem; font-weight: 600; margin-bottom: 10px; letter-spacing: 1px;">Titular del Estudio</p>
-            <p style="color: #475569; max-width: 600px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">T° XXVI F° 138 C.A.L.Z • Más de 15 años de experiencia defendiendo los derechos de los trabajadores y las familias con compromiso y ética profesional.</p>
-        </div>
-    </section>
-
-    <!-- SECCIÓN DE CASOS PUBLICADOS (NUEVA) -->
-    <section id="casos" style="padding: 60px 20px; background-color: #f8fafc;">
-        <div class="container">
-            <div class="section-header">
-                <h2>Casos de Éxito</h2>
-                <p>Resultados reales obtenidos para nuestros clientes</p>
-            </div>
-            <div id="casos-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
-                <!-- Los casos se cargan desde casos.js -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Sobre el Estudio -->
-    <section id="sobre-mi" class="sobre-estudio">
-        <div class="container">
-            <div class="sobre-grid">
-                <div class="sobre-content">
-                    <div class="badge">Dr. Claudio Daniel Palma</div>
-                    <h2>Más de 15 años de experiencia</h2>
-                    <p class="matricula">T° XXVI F° 138 C.A.L.Z</p>
-                    <p class="descripcion">Mi compromiso es brindar un servicio jurídico personalizado, ético y eficiente. Entiendo que cada caso es único y merece una atención dedicada.</p>
-                    
-                    <div class="stats">
-                        <div class="stat">
-                            <span class="stat-number">650+</span>
-                            <span class="stat-label">Casos exitosos</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Años</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Dedicación</span>
-                        </div>
-                    </div>
+            <div class="stats-grid">
+                <div>
+                    <div class="stat-number" id="casosExitosos">650+</div>
+                    <p>Casos exitosos</p>
                 </div>
-                <div class="sobre-destacados">
-                    <div class="destacado-item">
-                        <i class="fas fa-check-circle"></i>
-                        <h4>Atención Personalizada</h4>
-                        <p>Te explico todo en palabras simples</p>
-                    </div>
-                    <div class="destacado-item">
-                        <i class="fas fa-check-circle"></i>
-                        <h4>Respuesta Rápida</h4>
-                        <p>Respondo por WhatsApp en el día</p>
-                    </div>
-                    <div class="destacado-item">
-                        <i class="fas fa-check-circle"></i>
-                        <h4>Honorarios Claros</h4>
-                        <p>Sin sorpresas, acordamos todo desde el principio</p>
-                    </div>
+                <div>
+                    <div class="stat-number" id="anosExperiencia">15+</div>
+                    <p>Años de experiencia</p>
+                </div>
+                <div>
+                    <div class="stat-number" id="dedicacion">100%</div>
+                    <p>Dedicación exclusiva</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA WhatsApp -->
-    <section class="cta-whatsapp">
+    <!-- Casos de éxito (dinámicos) -->
+    <section id="casos">
         <div class="container">
-            <div class="cta-content">
-                <i class="fab fa-whatsapp fa-3x"></i>
-                <h2>Asesorate al 11-5311-2273</h2>
-                <p>Respondo consultas de Lunes a Viernes de 9 a 19hs</p>
-                <a href="https://wa.me/5491153112273" class="cta-button" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Enviar mensaje
-                </a>
+            <h2 class="section-title">Casos de éxito</h2>
+            <div id="casosContainer" class="casos-grid">
+                <!-- Los casos se cargan dinámicamente desde localStorage -->
             </div>
         </div>
     </section>
@@ -211,33 +582,28 @@
     <!-- Contacto -->
     <section id="contacto" class="contacto">
         <div class="container">
-            <div class="section-header">
-                <h2>Contacto</h2>
-                <p>Escribime sin compromiso</p>
-            </div>
-
+            <h2 class="section-title" style="color: white;">Contacto</h2>
             <div class="contacto-grid">
                 <div class="contacto-info">
                     <div class="contacto-card">
                         <i class="fab fa-whatsapp"></i>
                         <h3>WhatsApp</h3>
-                        <a href="https://wa.me/5491153112273" class="contacto-link">11-5311-2273</a>
+                        <a href="https://wa.me/5491153112273" class="contacto-link" id="contactWhatsapp">11-5311-2273</a>
                         <p class="contacto-desc">Respuesta rápida</p>
                     </div>
                     <div class="contacto-card">
                         <i class="fas fa-envelope"></i>
                         <h3>Email</h3>
-                        <a href="mailto:abogadoclaudiopalma.srt@gmail.com" class="contacto-link">abogadoclaudiopalma.srt@gmail.com</a>
+                        <a href="mailto:abogadoclaudiopalma.srt@gmail.com" class="contacto-link" id="contactEmail">abogadoclaudiopalma.srt@gmail.com</a>
                     </div>
                     <div class="contacto-card">
                         <i class="fas fa-map-marker-alt"></i>
                         <h3>Oficina</h3>
-                        <p class="contacto-link">Av. Corrientes 1234, CABA</p>
-                        <p class="contacto-desc">Con cita previa</p>
+                        <p class="contacto-link" id="contactAddress">Av. Corrientes 1234, CABA</p>
+                        <p class="contacto-desc" id="contactHours">Con cita previa · Lun-Vie 9-19hs</p>
                     </div>
                 </div>
-                
-                <div class="contacto-mapa">
+                <div class="contacto-mapa" id="contactMap">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.0168881864197!2d-58.38375908477037!3d-34.60373888045943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccacf0f8c7f6d%3A0x2b1d5e8c0b8b9c0f!2sAv.%20Corrientes%201234%2C%20C1043%20CABA!5e0!3m2!1ses!2sar!4v1620000000000!5m2!1ses!2sar" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
@@ -266,16 +632,16 @@
                 </div>
                 <div class="footer-contact">
                     <h4>Contacto</h4>
-                    <p><i class="fab fa-whatsapp"></i> 11-5311-2273</p>
-                    <p><i class="fas fa-envelope"></i> abogadoclaudiopalma.srt@gmail.com</p>
+                    <p><i class="fab fa-whatsapp"></i> <span id="footerWhatsapp">11-5311-2273</span></p>
+                    <p><i class="fas fa-envelope"></i> <span id="footerEmail">abogadoclaudiopalma.srt@gmail.com</span></p>
                 </div>
             </div>
             
-            <!-- ENLACES LEGALES (NUEVO) -->
+            <!-- ENLACES LEGALES -->
             <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
                 <a href="/aviso-legal.html" style="color: #94a3b8; margin: 0 10px;">Aviso Legal</a>
                 <a href="/politica-privacidad.html" style="color: #94a3b8; margin: 0 10px;">Política de Privacidad</a>
-                <a href="/admin.html" style="color: #94a3b8; margin: 0 10px; opacity:0.5;">⚙️</a>
+                <a href="/administrador.html" style="color: #94a3b8; margin: 0 10px; opacity:0.5;">⚙️ Panel</a>
             </div>
             
             <div class="footer-copyright">
@@ -284,7 +650,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
-    <script src="casos.js"></script>
-</body>
-                        </html>
+    <script>
+        // ==============================================
+        // CARGAR DATOS DESDE localSto
