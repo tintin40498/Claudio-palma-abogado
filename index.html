@@ -75,6 +75,22 @@
             flex-wrap: wrap;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .foto-profesional {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            background: white;
+            display: none;
+        }
+
         .logo h1 {
             font-size: 32px;
             font-weight: 600;
@@ -405,6 +421,10 @@
                 text-align: center;
             }
             
+            .header-left {
+                flex-direction: column;
+            }
+            
             nav ul {
                 margin-top: 20px;
                 flex-wrap: wrap;
@@ -431,9 +451,13 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
-                    <h1 id="mainTitle">Dr. Claudio Palma</h1>
-                    <p id="mainSubtitle">Derecho Civil · Comercial · Familiar · Laboral · Accidentes</p>
+                <div class="header-left">
+                    <!-- Foto profesional que se carga dinámicamente -->
+                    <img id="fotoProfesional" class="foto-profesional" src="" alt="Dr. Claudio Palma">
+                    <div class="logo">
+                        <h1 id="mainTitle">Dr. Claudio Palma</h1>
+                        <p id="mainSubtitle">Derecho Civil · Comercial · Familiar · Laboral · Accidentes</p>
+                    </div>
                 </div>
                 <nav>
                     <ul>
@@ -638,18 +662,4 @@
             </div>
             
             <!-- ENLACES LEGALES -->
-            <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-                <a href="/aviso-legal.html" style="color: #94a3b8; margin: 0 10px;">Aviso Legal</a>
-                <a href="/politica-privacidad.html" style="color: #94a3b8; margin: 0 10px;">Política de Privacidad</a>
-                <a href="/administrador.html" style="color: #94a3b8; margin: 0 10px; opacity:0.5;">⚙️ Panel</a>
-            </div>
-            
-            <div class="footer-copyright">
-                <p>&copy; 2024 Dr. Claudio Palma - Todos los derechos reservados</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // ==============================================
-        // CARGAR DATOS DESDE localSto
+            <div style="text-align: center; margin-top:
