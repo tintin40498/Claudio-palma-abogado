@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin — Dr. Claudio Palma</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f18;--surface:#161924;--border:#252840;
+  --gold:#c8a96e;--gold-dim:#c8a96e22;--muted:#5a5f7a;
+  --red:#e74c3c;--green:#2ecc71;
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:#e0e0e0;min-height:100vh}
+
+/* LOGIN */
+#login{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.lcard{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:48px 40px;width:100%;max-width:380px;text-align:center}
+.lcard .logo{font-size:2.5rem;margin-bottom:12px}
+.lcard h1{font-size:1.3rem;color:#fff;margin-bottom:4px}
+.lcard p{color:var(--muted);font-size:.85rem;margin-bottom:32px}
+.lcard input{width:100%;padding:13px 16px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:#fff;font-size:1rem;margin-bottom:12px;outline:none;transition:border .2s}
+.lcard input:focus{border-color:var(--gold)}
+.lcard .lbtn{width:100%;padding:13px;border-radius:10px;border:none;background:var(--gold);color:#111;font-weight:700;font-size:1rem;cursor:pointer;transition:opacity .2s}
+.lcard .lbtn:hover{opacity:.85}
+.lerr{color:var(--red);font-size:.82rem;margin-top:10px;display:none}
+
+/* PANEL */
+#panel{display:none;flex-direction:column;min-height:100vh}
+.hdr{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.hdr-l{display:flex;align-items:center;gap:12px}
+.hdr-title{font-size:1rem;font-weight:600;color:var(--gold)}
+.hdr-sub{font-size:.75rem;color:var(--muted);margin-top:1px}
+.btn-out{background:transparent;border:1px solid var(--border);color:var(--muted);padding:7px 16px;border-radius:8px;cursor:pointer;font-size:.8rem;transition:all .2s}
+.btn-out:hover{border-color:var(--red);color:var(--red)}
+
+/* ALERTA */
+.calert{background:#1a1200;border:1px solid var(--gold);border-radius:12px;padding:14px 18px;margin:20px 24px 0;font-size:.82rem;color:var(--gold);display:none;gap:10px;align-items:flex-start}
+.calert.show{display:flex}
+.calert strong{display:block;margin-bottom:4px;font-size:.9rem}
+.calert code{background:#0d0f18;padding:2px 6px;border-radius:4px;font-size:.78rem}
+
+/* TABS */
+.tabs{display:flex;gap:2px;padding:20px 24px 0;border-bottom:1px solid var(--border);overflow-x:auto}
+.tab{padding:10px 20px;border:1px solid var(--border);border-bottom:none;border-radius:10px 10px 0 0;background:var(--bg);color:var(--muted);cursor:pointer;font-size:.88rem;white-space:nowrap;transition:all .2s;user-select:none}
+.tab.active{background:var(--surface);color:var(--gold)}
+
+/* CONTENT */
+.content{padding:28px 24px;max-width:1100px}
+.sec{display:none}.sec.active{display:block}
+.sec-title{font-size:1.1rem;font-weight:600;color:#fff;margin-bottom:4px}
+.sec-desc{font-size:.82rem;color:var(--muted);margin-bottom:24px}
+
+/* DROP ZONE */
+.dz{border:2px dashed var(--border);border-radius:14px;padding:40px 20px;text-align:center;cursor:pointer;transition:all .25s;margin-bottom:20px;position:relative}
+.dz:hover,.dz.over{border-color:var(--gold);background:var(--gold-dim)}
+.dz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.dz-icon{font-size:2.8rem;margin-bottom:10px}
+.dz-txt{font-size:.9rem;color:var(--muted)}.dz-txt strong{color:var(--gold)}
+.dz-hint{font-size:.78rem;color:var(--muted);margin-top:4px}
+
+/* PREVIEW */
+.pvbox{display:none;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:20px}
+.pvbox img{width:72px;height:72px;object-fit:cover;border-radius:8px;flex-shrink:0}
+.pv-name{font-size:.85rem;font-weight:600;color:#ddd;word-break:break-all}
+.pv-size{font-size:.75rem;color:var(--muted);margin-top:3px}
+.pv-x{margin-left:auto;background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;padding:4px;line-height:1}
+.pv-x:hover{color:var(--red)}
+
+/* FIELDS */
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.fields.one{grid-template-columns:1fr}
+.fl{display:block;font-size:.78rem;color:var(--muted);margin-bottom:5px}
+.fields input,.fields select{width:100%;padding:11px 14px;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:#fff;font-size:.88rem;outline:none;transition:border .2s;font-family:inherit}
+.fields input:focus,.fields select:focus{border-color:var(--gold)}
+.fields input::placeholder{color:var(--muted)}
+.fields select option{background:var(--surface)}
+
+/* PROGRESS */
+.prog{height:5px;background:var(--border);border-radius:4px;margin-bottom:18px;overflow:hidden;display:none}
+.prog.show{display:block}
+.prog-bar{height:100%;background:var(--gold);border-radius:4px;transition:width .4s;width:0%}
+
+/* UPLOAD BTN */
+.btn-up{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#111;border:none;padding:12px 26px;border-radius:10px;font-weight:700;font-size:.92rem;cursor:pointer;transition:opacity .2s}
+.btn-up:hover{opacity:.85}.btn-up:disabled{opacity:.4;cursor:not-allowed}
+.spin{width:16px;height:16px;border:2.5px solid #11111140;border-top-color:#111;border-radius:50%;animation:rot .6s linear infinite;flex-shrink:0}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+.divider{border:none;border-top:1px solid var(--border);margin:28px 0}
+
+/* GALLERY */
+.gal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.gal-hd h3{font-size:.95rem;color:var(--muted)}
+.btn-ref{background:transparent;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:7px;cursor:pointer;font-size:.78rem;transition:all .2s}
+.btn-ref:hover{border-color:var(--gold);color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative;transition:border-color .2s}
+.card:hover{border-color:var(--gold)}
+.card img{width:100%;height:150px;object-fit:cover;display:block}
+.card-body{padding:10px 12px}
+.card-title{font-size:.82rem;font-weight:600;color:#ddd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-meta{font-size:.74rem;color:var(--muted);margin-top:3px}
+.card-tag{display:inline-block;background:var(--gold-dim);color:var(--gold);font-size:.68rem;padding:2px 8px;border-radius:20px;margin-top:6px}
+.card-del{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;border:none;background:#e74c3ccc;color:#fff;cursor:pointer;font-size:.85rem;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.card:hover .card-del{opacity:1}.card-del:hover{background:var(--red)}
+.empty{text-align:center;padding:56px 20px;color:var(--muted)}
+.empty .ei{font-size:2.8rem;margin-bottom:10px}
+.empty p{font-size:.85rem}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;right:24px;padding:13px 20px;border-radius:11px;font-size:.88rem;font-weight:600;opacity:0;transform:translateY(8px);transition:all .3s;pointer-events:none;z-index:9999;max-width:320px}
+#toast.show{opacity:1;transform:translateY(0)}
+#toast.ok{background:#0d2b0d;border:1px solid var(--green);color:var(--green)}
+#toast.err{background:#2b0d0d;border:1px solid var(--red);color:var(--red)}
+
+@media(max-width:600px){
+  .fields{grid-template-columns:1fr}
+  .hdr{padding:12px 16px}
+  .content{padding:20px 14px}
+  .tabs{padding:16px 14px 0}
+  .lcard{padding:36px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="lcard">
+    <div class="logo">⚖️</div>
+    <h1>Panel de Administración</h1>
+    <p>Dr. Claudio Palma &middot; Estudio Jurídico</p>
+    <input type="password" id="pwd" placeholder="Contraseña" autocomplete="current-password"/>
+    <button class="lbtn" onclick="doLogin()">Ingresar</button>
+    <div class="lerr" id="lerr">⚠️ Contraseña incorrecta</div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div id="panel">
+
+  <div class="hdr">
+    <div class="hdr-l">
+      <span style="font-size:1.5rem">⚖️</span>
+      <div>
+        <div class="hdr-title">Panel de Administración</div>
+        <div class="hdr-sub">Dr. Claudio Palma &middot; Estudio Jurídico</div>
+      </div>
+    </div>
+    <button class="btn-out" onclick="doLogout()">Salir</button>
+  </div>
+
+  <div class="calert" id="calert">
+    <span style="font-size:1.2rem;margin-top:2px">⚠️</span>
+    <div>
+      <strong>Configuración pendiente</strong>
+      Abrí este archivo con un editor de texto y completá las 5 variables dentro de <code>const CFG = { ... }</code> al inicio del script.
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="goTab('casos',this)">📁 Casos de Éxito</div>
+    <div class="tab" onclick="goTab('sobre',this)">👤 Sobre Mí</div>
+    <div class="tab" onclick="goTab('galeria',this)">🖼️ Galería</div>
+  </div>
+
+  <div class="content">
+
+    <!-- CASOS -->
+    <div class="sec active" id="s-casos">
+      <div class="sec-title">Casos de Éxito</div>
+      <div class="sec-desc">Subí imágenes para ilustrar los casos exitosos que aparecen en el sitio.</div>
+
+      <div class="dz" id="dz-casos">
+        <input type="file" id="f-casos" accept="image/*" onchange="onFile('casos')"/>
+        <div class="dz-icon">📂</div>
+        <div class="dz-txt">Arrastrá una imagen o <strong>hacé clic aquí</strong></div>
+        <div class="dz-hint">JPG &middot; PNG &middot; WEBP — máx. 10 MB</div>
+      </div>
+
+      <div class="pvbox" id="pv-casos">
+        <img id="pv-casos-img" src="" alt="preview"/>
+        <div>
+          <div class="pv-name" id="pv-casos-name"></div>
+          <div class="pv-size" id="pv-casos-size"></div>
+        </div>
+        <button class="pv-x" onclick="clearFile('casos')">✕</button>
+      </div>
+
+      <div class="fields">
+        <div>
+          <label class="fl">Título del caso *</label>
+          <input type="text" id="c-titulo" placeholder="Ej: Despido injustificado – 8 años"/>
+        </div>
+        <div>
+          <label class="fl">Tipo de caso</label>
+          <select id="c-tipo">
+            <option value="">— Elegir —</option>
+            <option>Laboral</option><option>Civil</option><option>Familiar</option>
+            <option>Comercial</option><option>Tránsito</option><option>ART</option>
+          </select>
+        </div>
+        <div>
+          <label class="fl">Resultado obtenido</label>
+          <input type="text" id="c-resultado" placeholder="Ej: Indemnización completa + intereses"/>
+        </div>
+        <div>
+          <label class="fl">Descripción breve</label>
+          <input type="text" id="c-desc" placeholder="Ej: Cliente despedido sin causa"/>
+        </div>
+      </div>
+
+      <div class="prog" id="pg-casos"><div class="prog-bar" id="pgb-casos"></div></div>
+      <button class="btn-up" id="btn-casos" onclick="upload('casos')">
+        <span>⬆️</span> Subir imagen
+      </button>
+
+      <hr class="divider"/>
+      <div class="gal-hd">
+        <h3>Imágenes guardadas</h3>
+        <button class="btn-ref" onclick="loadGal('casos')">↻ Actualizar</button>
+      </div>
+      <div class="grid" id="g-casos">
+        <div class="empty"><div class="ei">📁</div><p>Aún no hay imágenes</p></div>
+      </div>
+    </div>
+
+    <!-- SOBRE MÍ -->
+    <div class="sec" id="s-sobre">
+      <div class="sec-title">Foto — Sobre Mí</div>
+      <div class="sec-desc">Subí la foto del Dr. Claudio Palma para la sección "Sobre mí" del sitio.</div>
+
+      <div class="dz" id="dz-sobre">
+        <input type="file" id="f-sobre" accept="image/*" onchange="onFile('sobre')"/>
+        <div class="dz-icon">👤</div>
+        <div class="dz-txt">Arrastrá la foto o <strong>hacé clic aquí</strong></div>
+        <div class="dz-hint">Recomendado: imagen cuadrada, buena calidad</div>
+      </div>
+
+      <div class="pvbox" id="pv-sobre">
+        <img id="pv-sobre-img" src="" alt="preview"/>
+        <div>
+          <div class="pv-name" id="pv-sobre-name"></div>
+          <div class="pv-size" id="pv-sobre-size"></div>
+        </div>
+        <button class="pv-x" onclick="clearFile('sobre')">✕</button>
+      </div>
+
+      <div class="fields one">
+        <div>
+          <label class="fl">Texto alternativo (accesibilidad)</label>
+          <input type="text" id="s-alt" placeholder="Ej: Foto del Dr. Claudio Palma, abogado"/>
+        </div>
+      </div>
+
+      <div class="prog" id="pg-sobre"><div class="prog-bar" id="pgb-sobre"></div></div>
+      <button class="btn-up" id="btn-sobre" onclick="upload('sobre')">
+        <span>⬆️</span> Subir foto
+      </button>
+
+      <hr class="divider"/>
+      <div class="gal-hd">
+        <h3>Fotos guardadas</h3>
+        <button class="btn-ref" onclick="loadGal('sobre')">↻ Actualizar</button>
+      </div>
+      <div class="grid" id="g-sobre">
+        <div class="empty"><div class="ei">👤</div><p>Aún no hay fotos</p></div>
+      </div>
+      </div>
+          <!-- GALERÍA -->
+    <div class="sec" id="s-galeria">
+      <div class="sec-title">Galería General</div>
+      <div class="sec-desc">Subí fotos del estudio, eventos, diplomas o cualquier imagen para el sitio.</div>
+
+      <div class="dz" id="dz-galeria">
+        <input type="file" id="f-galeria" accept="image/*" multiple onchange="onFile('galeria')"/>
+        <div class="dz-icon">🖼️</div>
+        <div class="dz-txt">Arrastrá imágenes o <strong>hacé clic aquí</strong></div>
+        <div class="dz-hint">Podés subir varias a la vez</div>
+      </div>
+
+      <div class="pvbox" id="pv-galeria">
+        <img id="pv-galeria-img" src="" alt="preview"/>
+        <div>
+          <div class="pv-name" id="pv-galeria-name"></div>
+          <div class="pv-size" id="pv-galeria-size"></div>
+        </div>
+        <button class="pv-x" onclick="clearFile('galeria')">✕</button>
+      </div>
+
+      <div class="fields">
+        <div>
+          <label class="fl">Título (opcional)</label>
+          <input type="text" id="g-titulo" placeholder="Ej: Estudio jurídico"/>
+        </div>
+        <div>
+          <label class="fl">Descripción (opcional)</label>
+          <input type="text" id="g-desc" placeholder="Ej: Vista de la oficina principal"/>
+        </div>
+      </div>
+
+      <div class="prog" id="pg-galeria"><div class="prog-bar" id="pgb-galeria"></div></div>
+      <button class="btn-up" id="btn-galeria" onclick="upload('galeria')">
+        <span>⬆️</span> Subir imagen(es)
+      </button>
+
+      <hr class="divider"/>
+      <div class="gal-hd">
+        <h3>Imágenes guardadas</h3>
+        <button class="btn-ref" onclick="loadGal('galeria')">↻ Actualizar</button>
+      </div>
+      <div class="grid" id="g-galeria">
+        <div class="empty"><div class="ei">🖼️</div><p>Aún no hay imágenes</p></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   ⚙️ CONFIGURACIÓN — COMPLETÁ ESTAS 5 VARIABLES
+   ═══════════════════════════════════════════════ */
+const CFG = {
+  CL_CLOUD  : 'TU_CLOUD_NAME',       // cloudinary.com → Dashboard → Cloud Name
+  CL_PRESET : 'TU_UPLOAD_PRESET',    // Cloudinary → Settings → Upload → Preset (modo "Unsigned")
+  JB_KEY    : 'TU_JSONBIN_API_KEY',  // jsonbin.io → Account → API Keys
+  JB_BIN    : 'TU_JSONBIN_BIN_ID',   // jsonbin.io → ID del bin que creaste
+  PWD       : 'P@lma_'               // ← contraseña del panel
+};
+/* ═══════════════════════════════════════════════ */
+
+const isOK = () => !Object.values(CFG).some(v => String(v).startsWith('TU_'));
+
+function toast(msg, tipo){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + (tipo === 'ok' ? 'ok' : 'err');
+  setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+/* LOGIN */
+function doLogin(){
+  if(document.getElementById('pwd').value === CFG.PWD){
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('panel').style.display = 'flex';
+    if(!isOK()) document.getElementById('calert').classList.add('show');
+    else { loadGal('casos'); loadGal('sobre'); loadGal('galeria'); }
+  } else {
+    document.getElementById('lerr').style.display = 'block';
+    document.getElementById('pwd').value = '';
+    document.getElementById('pwd').focus();
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', e => {
+  if(e.key === 'Enter') doLogin();
+  document.getElementById('lerr').style.display = 'none';
+});
+function doLogout(){
+  document.getElementById('panel').style.display = 'none';
+  document.getElementById('login').style.display = 'flex';
+  document.getElementById('pwd').value = '';
+}
+
+/* TABS */
+function goTab(id, el){
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('s-' + id).classList.add('active');
+}
+
+/* DRAG & DROP */
+['casos','sobre','galeria'].forEach(sec => {
+  const dz = document.getElementById('dz-' + sec);
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+  dz.addEventListener('drop', e => {
+    e.preventDefault();
+    dz.classList.remove('over');
+    const fi = document.getElementById('f-' + sec);
+    const dt = new DataTransfer();
+    Array.from(e.dataTransfer.files).forEach(f => dt.items.add(f));
+    fi.files = dt.files;
+    onFile(sec);
+  });
+});
+
+/* PREVIEW */
+function onFile(sec){
+  const fi = document.getElementById('f-' + sec);
+  if(!fi.files.length) return;
+  const file = fi.files[0];
+  document.getElementById('pv-' + sec + '-img').src  = URL.createObjectURL(file);
+  document.getElementById('pv-' + sec + '-name').textContent = file.name;
+  document.getElementById('pv-' + sec + '-size').textContent = fmtBytes(file.size);
+  document.getElementById('pv-' + sec).style.display = 'flex';
+}
+function clearFile(sec){
+  document.getElementById('f-' + sec).value = '';
+  document.getElementById('pv-' + sec).style.display = 'none';
+}
+function fmtBytes(b){
+  if(b < 1024) return b + ' B';
+  if(b < 1048576) return (b / 1024).toFixed(0) + ' KB';
+  return (b / 1048576).toFixed(1) + ' MB';
+}
+function v(id){ return document.getElementById(id)?.value || ''; }
+
+/* PROGRESS */
+function setProgress(sec, p){
+  const prog = document.getElementById('pg-' + sec);
+  prog.classList.add('show');
+  document.getElementById('pgb-' + sec).style.width = p + '%';
+  if(p >= 100) setTimeout(() => prog.classList.remove('show'), 800);
+}
+
+/* UPLOAD */
+async function upload(sec){
+  if(!isOK()){ toast('Completá la configuración primero', 'err'); return; }
+  const fi = document.getElementById('f-' + sec);
+  if(!fi.files.length){ toast('Seleccioná una imagen primero', 'err'); return; }
+
+  const files = Array.from(fi.files);
+  const btn   = document.getElementById('btn-' + sec);
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Subiendo...';
+  setProgress(sec, 10);
+
+  try {
+    const items = [];
+    for(let i = 0; i < files.length; i++){
+      const fd = new FormData();
+      fd.append('file', files[i]);
+      fd.append('upload_preset', CFG.CL_PRESET);
+      fd.append('folder', `claudio-palma/${sec}`);
+
+      const res  = await fetch(
+        `https://api.cloudinary.com/v1_1/${CFG.CL_CLOUD}/image/upload`,
+        { method: 'POST', body: fd }
+      );
+      const data = await res.json();
+      if(!data.secure_url) throw new Error(data.error?.message || 'Error en Cloudinary');
+
+      setProgress(sec, Math.round(20 + 60 * (i + 1) / files.length));
+
+      const obj = { id: data.public_id, url: data.secure_url, fecha: new Date().toISOString() };
+      if(sec === 'casos'){
+        obj.titulo      = v('c-titulo')    || 'Sin título';
+        obj.tipo        = v('c-tipo')      || '';
+        obj.resultado   = v('c-resultado') || '';
+        obj.descripcion = v('c-desc')      || '';
+      }
+      if(sec === 'sobre'){
+        obj.alt = v('s-alt') || 'Dr. Claudio Palma';
+      }
+      if(sec === 'galeria'){
+        obj.titulo = v('g-titulo') || '';
+        obj.desc   = v('g-desc')   || '';
+      }
+      items.push(obj);
+    }
+        setProgress(sec, 85);
+    await jbAppend(sec, items);
+    setProgress(sec, 100);
+
+    toast(files.length > 1 ? `✅ ${files.length} imágenes subidas` : '✅ Imagen subida correctamente', 'ok');
+    clearFile(sec);
+    if(sec === 'casos') { document.getElementById('c-titulo').value = ''; document.getElementById('c-tipo').value = ''; document.getElementById('c-resultado').value = ''; document.getElementById('c-desc').value = ''; }
+    if(sec === 'sobre') { document.getElementById('s-alt').value = ''; }
+    if(sec === 'galeria') { document.getElementById('g-titulo').value = ''; document.getElementById('g-desc').value = ''; }
+    document.getElementById('f-' + sec).value = '';
+    loadGal(sec);
+  } catch(e){
+    toast('Error: ' + e.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<span>⬆️</span> Subir imagen';
+  }
+}
+
+/* JSONBIN */
+async function jbAppend(sec, nuevos){
+  const url = `https://api.jsonbin.io/v3/b/${CFG.JB_BIN}`;
+  const headers = {
+    'X-Master-Key': CFG.JB_KEY,
+    'Content-Type': 'application/json'
+  };
+  const getRes = await fetch(url, { headers });
+  let data = await getRes.json();
+  let record = data.record || {};
+  if(!record[sec]) record[sec] = [];
+  record[sec] = record[sec].concat(nuevos);
+  await fetch(url, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(record)
+  });
+}
+
+async function jbDel(sec, id){
+  const url = `https://api.jsonbin.io/v3/b/${CFG.JB_BIN}`;
+  const headers = {
+    'X-Master-Key': CFG.JB_KEY,
+    'Content-Type': 'application/json'
+  };
+  const getRes = await fetch(url, { headers });
+  let data = await getRes.json();
+  let record = data.record || {};
+  if(record[sec]) record[sec] = record[sec].filter(x => x.id !== id);
+  await fetch(url, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(record)
+  });
+}
+
+async function loadGal(sec){
+  if(!isOK()) return;
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${CFG.JB_BIN}/latest`, {
+      headers: { 'X-Master-Key': CFG.JB_KEY }
+    });
+    if(!res.ok) throw new Error();
+    const data = (await res.json()).record;
+    const items = data[sec] || [];
+    const grid  = document.getElementById('g-' + sec);
+    if(items.length === 0){
+      grid.innerHTML = `<div class="empty"><div class="ei">${sec === 'casos' ? '📁' : sec === 'sobre' ? '👤' : '🖼️'}</div><p>Aún no hay imágenes</p></div>`;
+      return;
+    }
+    let html = '';
+    items.slice().reverse().forEach(item => {
+      if(sec === 'sobre'){
+        html += `<div class="card"><img src="${item.url}" alt="${item.alt || ''}"><div class="card-body"><div class="card-title">${item.alt || 'Sin título'}</div><div class="card-meta">${new Date(item.fecha).toLocaleDateString()}</div><button class="card-del" onclick="deleteItem('sobre','${item.id}')">✕</button></div></div>`;
+      } else if(sec === 'casos'){
+        html += `<div class="card"><img src="${item.url}" alt="${item.titulo || ''}"><div class="card-body"><div class="card-title">${item.titulo || 'Sin título'}</div><div class="card-meta">${item.tipo || ''}</div>${item.resultado ? '<div class="card-tag">✓ ' + item.resultado + '</div>' : ''}<button class="card-del" onclick="deleteItem(\'casos\',\'${item.id}\')">✕</button></div></div>`;
+      } else {
+        html += `<div class="card"><img src="${item.url}" alt="${item.titulo || ''}"><div class="card-body"><div class="card-title">${item.titulo || 'Sin título'}</div>${item.desc ? '<div class="card-meta">' + item.desc + '</div>' : ''}<button class="card-del" onclick="deleteItem(\'galeria\',\'${item.id}\')">✕</button></div></div>`;
+      }
+    });
+    grid.innerHTML = html;
+  } catch(e){
+    grid.innerHTML = `<div class="empty"><div class="ei">⚠️</div><p>Error al cargar</p></div>`;
+  }
+}
+
+async function deleteItem(sec, id){
+  if(!confirm('¿Eliminar esta imagen?')) return;
+  await jbDel(sec, id);
+  loadGal(sec);
+}
+</script>
+
+</body>
+</html>
